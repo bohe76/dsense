@@ -8,4 +8,6 @@ export interface WorkItem {
     media_type: string | null;
     thumbnail: string;
     video_src?: string | null;
+    video_width?: number;
+    video_height?: number;
 }

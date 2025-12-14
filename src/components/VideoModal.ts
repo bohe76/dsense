@@ -1,3 +1,4 @@
+import { WorkItem } from '../types';
 
 export class VideoModal {
     private tempContainer: HTMLDivElement;
@@ -97,10 +98,16 @@ export class VideoModal {
         });
     }
 
-    public open(videoSrc: string) {
-        if (!this.overlay || !this.videoElement) return;
+    public open(project: WorkItem) {
+        if (!this.overlay || !this.videoElement || !project.video_src) return;
 
-        this.videoElement.src = videoSrc;
+        if (project.video_width && project.video_height) {
+            this.videoElement.style.aspectRatio = `${project.video_width} / ${project.video_height}`;
+        } else {
+            this.videoElement.style.aspectRatio = 'auto';
+        }
+
+        this.videoElement.src = project.video_src;
         this.overlay.style.display = 'flex';
 
         // Forced reflow for transition
@@ -120,6 +127,7 @@ export class VideoModal {
             if (this.videoElement) {
                 this.videoElement.pause();
                 this.videoElement.src = ""; // Stop buffering
+                this.videoElement.style.aspectRatio = 'auto'; // Reset aspect ratio
             }
         }, 300);
     }

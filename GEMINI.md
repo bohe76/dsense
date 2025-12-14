@@ -21,6 +21,14 @@
 npm run dev
 ```
 
+#### 백그라운드 실행
+
+**중요:** 개발 서버는 다음 명령어를 사용하여 반드시 백그라운드에서 실행해야 합니다. 그렇지 않으면 CLI가 다른 명령을 처리할 수 없습니다.
+
+```powershell
+Start-Process cmd -ArgumentList "/c", "npm run dev" -NoNewWindow
+```
+
 ### 빌드
 
 프로덕션을 위해 프로젝트를 빌드하려면 다음 명령을 사용하십시오. 출력물은 `dist` 디렉토리에 배치됩니다.

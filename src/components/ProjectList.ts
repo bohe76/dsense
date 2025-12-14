@@ -101,7 +101,7 @@ export class ProjectList {
             const project = this.projects.find(p => p.no === Number(id));
             if (project && project.video_src) {
               // Only if video source exists
-              this.videoModal.open(project.video_src);
+              this.videoModal.open(project);
             }
           }
         }
