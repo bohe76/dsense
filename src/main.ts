@@ -10,7 +10,6 @@ import { Thinking } from './components/Thinking';
 import { ProjectList } from './components/ProjectList';
 import { Contact } from './components/Contact';
 
-
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 

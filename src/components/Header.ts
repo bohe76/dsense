@@ -1,4 +1,4 @@
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 
 export class Header {
   private element: HTMLElement;
@@ -54,7 +54,7 @@ export class Header {
         </div>
       </div>
     `;
-    this.element.className = "header";
+    this.element.className = 'header';
   }
 
   initAnimations() {
@@ -68,7 +68,7 @@ export class Header {
     });
 
     // Intro animation
-    const navItems = this.element.querySelectorAll(".logo, .nav-link");
+    const navItems = this.element.querySelectorAll('.logo, .nav-link');
     gsap.set(navItems, { y: -20, opacity: 0 }); // Ensure hidden initially
 
     gsap.to(navItems, {
@@ -76,15 +76,17 @@ export class Header {
       opacity: 1,
       duration: 1,
       stagger: 0.1,
-      ease: "power3.out",
-      delay: 0.2
+      ease: 'power3.out',
+      delay: 0.2,
     });
 
     // Mobile Menu Logic
     const menuBtn = this.element.querySelector('.mobile-menu-btn');
     const closeBtn = this.element.querySelector('.mobile-menu-close');
     const overlay = this.element.querySelector('.mobile-menu-overlay');
-    const navList = this.element.querySelector('.mobile-nav-list') as HTMLElement;
+    const navList = this.element.querySelector(
+      '.mobile-nav-list'
+    ) as HTMLElement;
     const mobileLinks = this.element.querySelectorAll('.mobile-nav-link');
 
     if (menuBtn && overlay && closeBtn && navList) {
@@ -110,14 +112,14 @@ export class Header {
       tl.to(overlay, {
         display: 'flex',
         opacity: 1,
-        duration: 0.1
+        duration: 0.1,
       })
         // 2. Gradient Mask Reveal (Direct JS Control)
         .to(mask, {
           value: 150,
           duration: 3,
-          ease: "power1.out",
-          onUpdate: updateMask
+          ease: 'power1.out',
+          onUpdate: updateMask,
         });
 
       menuBtn.addEventListener('click', () => {
@@ -130,7 +132,7 @@ export class Header {
       };
 
       closeBtn.addEventListener('click', closeMenu);
-      mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+      mobileLinks.forEach((link) => link.addEventListener('click', closeMenu));
     }
   }
 }

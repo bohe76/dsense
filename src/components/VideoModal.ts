@@ -1,19 +1,19 @@
 import { WorkItem } from '../types';
 
 export class VideoModal {
-    private tempContainer: HTMLDivElement;
-    private overlay: HTMLDivElement | null = null;
-    private videoElement: HTMLVideoElement | null = null;
+  private tempContainer: HTMLDivElement;
+  private overlay: HTMLDivElement | null = null;
+  private videoElement: HTMLVideoElement | null = null;
 
-    constructor() {
-        this.tempContainer = document.createElement('div');
-        this.createModalStructure();
-        this.attachEvents();
-    }
+  constructor() {
+    this.tempContainer = document.createElement('div');
+    this.createModalStructure();
+    this.attachEvents();
+  }
 
-    private createModalStructure() {
-        // Hidden by default, appended to body only when opened
-        this.tempContainer.innerHTML = `
+  private createModalStructure() {
+    // Hidden by default, appended to body only when opened
+    this.tempContainer.innerHTML = `
       <div id="video-modal-overlay" style="
         position: fixed; 
         top: 0; 
@@ -63,72 +63,76 @@ export class VideoModal {
       </div>
     `;
 
-        // We don't append to body yet, we just store the structure
-        // But to find elements, we need a root.
-        document.body.appendChild(this.tempContainer);
+    // We don't append to body yet, we just store the structure
+    // But to find elements, we need a root.
+    document.body.appendChild(this.tempContainer);
 
-        this.overlay = this.tempContainer.querySelector('#video-modal-overlay');
-        this.videoElement = this.tempContainer.querySelector('#modal-video-player');
+    this.overlay = this.tempContainer.querySelector('#video-modal-overlay');
+    this.videoElement = this.tempContainer.querySelector('#modal-video-player');
 
-        // Initially hidden
-        if (this.overlay) this.overlay.style.display = 'none';
+    // Initially hidden
+    if (this.overlay) this.overlay.style.display = 'none';
+  }
+
+  private attachEvents() {
+    if (!this.overlay) return;
+
+    // Close on overlay click
+    this.overlay.addEventListener('click', (e) => {
+      if (e.target === this.overlay) {
+        this.close();
+      }
+    });
+
+    // Close on button click
+    const closeBtn = this.overlay.querySelector('#modal-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.close());
     }
 
-    private attachEvents() {
-        if (!this.overlay) return;
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === 'Escape' &&
+        this.overlay &&
+        this.overlay.style.display === 'flex'
+      ) {
+        this.close();
+      }
+    });
+  }
 
-        // Close on overlay click
-        this.overlay.addEventListener('click', (e) => {
-            if (e.target === this.overlay) {
-                this.close();
-            }
-        });
+  public open(project: WorkItem) {
+    if (!this.overlay || !this.videoElement || !project.video_src) return;
 
-        // Close on button click
-        const closeBtn = this.overlay.querySelector('#modal-close-btn');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.close());
-        }
-
-        // Close on ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.overlay && this.overlay.style.display === 'flex') {
-                this.close();
-            }
-        });
+    if (project.video_width && project.video_height) {
+      this.videoElement.style.aspectRatio = `${project.video_width} / ${project.video_height}`;
+    } else {
+      this.videoElement.style.aspectRatio = 'auto';
     }
 
-    public open(project: WorkItem) {
-        if (!this.overlay || !this.videoElement || !project.video_src) return;
+    this.videoElement.src = project.video_src;
+    this.overlay.style.display = 'flex';
 
-        if (project.video_width && project.video_height) {
-            this.videoElement.style.aspectRatio = `${project.video_width} / ${project.video_height}`;
-        } else {
-            this.videoElement.style.aspectRatio = 'auto';
-        }
+    // Forced reflow for transition
+    requestAnimationFrame(() => {
+      if (this.overlay) this.overlay.style.opacity = '1';
+    });
+  }
 
-        this.videoElement.src = project.video_src;
-        this.overlay.style.display = 'flex';
+  public close() {
+    if (!this.overlay || !this.videoElement) return;
 
-        // Forced reflow for transition
-        requestAnimationFrame(() => {
-            if (this.overlay) this.overlay.style.opacity = '1';
-        });
-    }
+    this.overlay.style.opacity = '0';
 
-    public close() {
-        if (!this.overlay || !this.videoElement) return;
-
-        this.overlay.style.opacity = '0';
-
-        // Wait for transition end
-        setTimeout(() => {
-            if (this.overlay) this.overlay.style.display = 'none';
-            if (this.videoElement) {
-                this.videoElement.pause();
-                this.videoElement.src = ""; // Stop buffering
-                this.videoElement.style.aspectRatio = 'auto'; // Reset aspect ratio
-            }
-        }, 300);
-    }
+    // Wait for transition end
+    setTimeout(() => {
+      if (this.overlay) this.overlay.style.display = 'none';
+      if (this.videoElement) {
+        this.videoElement.pause();
+        this.videoElement.src = ''; // Stop buffering
+        this.videoElement.style.aspectRatio = 'auto'; // Reset aspect ratio
+      }
+    }, 300);
+  }
 }
