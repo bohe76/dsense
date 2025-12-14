@@ -138,6 +138,17 @@ export class ProjectList {
         }
       });
     }
+
+    // Add mouseenter/mouseleave for custom hover effect to prevent mobile 'stickiness'
+    const filterChips = this.element.querySelectorAll('.filter-chip');
+    filterChips.forEach(chip => {
+      chip.addEventListener('mouseenter', () => {
+        chip.classList.add('is-hovered');
+      });
+      chip.addEventListener('mouseleave', () => {
+        chip.classList.remove('is-hovered');
+      });
+    });
   }
 
   toggleCategory(category: string, chipElement: HTMLElement) {

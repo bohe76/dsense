@@ -1237,9 +1237,14 @@ ul {
 /* Standard Deep Purple for Metaverse if not defined */
 
 .filter-chip:hover {
-  transform: translateY(-2px);
+  /* transform: translateY(-2px); Removed to prevent mobile hover stickiness */
   filter: brightness(1.1);
 }
+
+.filter-chip.is-hovered {
+  transform: translateY(-2px);
+}
+
 
 
 /* Mobile: Always show video play button */
