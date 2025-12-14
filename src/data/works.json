@@ -322,7 +322,7 @@
       "기부 독려 스토리텔링 연출"
     ],
     "thumbnail": "/images/017.png",
-    "video_src": "/videos/017.mp4"
+    "video_src": "https://pub-d9ca82cd711942f98faa7b2228e78c3d.r2.dev/videos/017.mp4"
   },
   {
     "no": 18,
@@ -341,7 +341,7 @@
       "전시/학회용 가독성 최적화"
     ],
     "thumbnail": "/images/018.png",
-    "video_src": "/videos/018.mp4"
+    "video_src": "https://pub-d9ca82cd711942f98faa7b2228e78c3d.r2.dev/videos/018.mp4"
   },
   {
     "no": 19,
@@ -360,7 +360,7 @@
       "주목도 높은 타이포그래피 모션"
     ],
     "thumbnail": "/images/019.png",
-    "video_src": "/videos/019.mp4"
+    "video_src": "https://pub-d9ca82cd711942f98faa7b2228e78c3d.r2.dev/videos/019.mp4"
   },
   {
     "no": 20,
@@ -415,7 +415,7 @@
       "시선 이동을 고려한 레이아웃"
     ],
     "thumbnail": "/images/022.png",
-    "video_src": null
+    "video_.src": null
   },
   {
     "no": 23,
@@ -434,7 +434,7 @@
       "푸드 특화 컬러 그레이딩"
     ],
     "thumbnail": "/images/023.png",
-    "video_src": "/videos/023.mp4"
+    "video_src": "https://pub-d9ca82cd711942f98faa7b2228e78c3d.r2.dev/videos/023.mp4"
   },
   {
     "no": 24,
@@ -453,6 +453,6 @@
       "직관적인 혜택 강조(군만두 서비스)로 주문 유도"
     ],
     "thumbnail": "/images/024.png",
-    "video_src": "/videos/024.mp4"
+    "video_src": "https://pub-d9ca82cd711942f98faa7b2228e78c3d.r2.dev/videos/024.mp4"
   }
 ]
