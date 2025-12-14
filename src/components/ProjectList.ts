@@ -11,6 +11,8 @@ export class ProjectList {
   private videoModal: VideoModal;
   private activeCategories: Set<string>;
   private allCategories: string[];
+  private projectCountSpan: HTMLElement | null = null;
+  private floatingCounterScrollTriggers: ScrollTrigger[] = []; // New property to store ScrollTrigger instances
 
   constructor(targetId: string) {
     const target = document.getElementById(targetId);
@@ -28,6 +30,9 @@ export class ProjectList {
 
     this.render();
     this.attachEvents();
+    this.projectCountSpan = this.element.querySelector('.project-count');
+    this.updateSectionProjectCount();
+    this.setupFloatingCounterScrollTriggers(); // Initial setup for floating counter
   }
 
   render() {
@@ -141,7 +146,7 @@ export class ProjectList {
 
     // Add mouseenter/mouseleave for custom hover effect to prevent mobile 'stickiness'
     const filterChips = this.element.querySelectorAll('.filter-chip');
-    filterChips.forEach(chip => {
+    filterChips.forEach((chip) => {
       chip.addEventListener('mouseenter', () => {
         chip.classList.add('is-hovered');
       });
@@ -167,6 +172,18 @@ export class ProjectList {
     this.filterProjects();
   }
 
+  private updateSectionProjectCount() {
+    if (this.projectCountSpan) {
+      const visibleCards = Array.from(
+        this.element.querySelectorAll('.work-card')
+      ) as HTMLElement[];
+      const visibleCount = visibleCards.filter(
+        (card) => window.getComputedStyle(card).display !== 'none'
+      ).length;
+      this.projectCountSpan.textContent = `/ ${visibleCount.toString().padStart(2, '0')}`;
+    }
+  }
+
   filterProjects() {
     const cards = Array.from(
       this.element.querySelectorAll('.work-card')
@@ -184,8 +201,41 @@ export class ProjectList {
       }
     });
 
-    // Refresh ScrollTrigger
+    this.updateSectionProjectCount(); // Update the section header count after filtering
     ScrollTrigger.refresh();
+    this.setupFloatingCounterScrollTriggers(); // Re-setup floating counter after filtering
+  }
+
+  // New method to set up/re-setup ScrollTriggers for the floating counter
+  private setupFloatingCounterScrollTriggers() {
+    // Kill existing ScrollTriggers to prevent duplicates and memory leaks
+    this.floatingCounterScrollTriggers.forEach((st) => st.kill());
+    this.floatingCounterScrollTriggers = []; // Clear the array
+
+    const counter = this.element.querySelector('.project-floating-counter');
+    if (!counter) return;
+
+    // Get only currently visible cards
+    const visibleCards = Array.from(
+      this.element.querySelectorAll('.work-card')
+    ).filter(
+      (card) => window.getComputedStyle(card).display !== 'none'
+    ) as HTMLElement[];
+
+    visibleCards.forEach((card, index) => {
+      const st = ScrollTrigger.create({
+        trigger: card,
+        start: 'top 60%',
+        end: 'bottom 60%',
+        onEnter: () => {
+          if (counter) counter.textContent = `${index + 1}`;
+        },
+        onEnterBack: () => {
+          if (counter) counter.textContent = `${index + 1}`;
+        },
+      });
+      this.floatingCounterScrollTriggers.push(st); // Store the instance
+    });
   }
 
   initAnimations() {
@@ -237,23 +287,24 @@ export class ProjectList {
       onLeaveBack: () => counter?.classList.remove('visible'),
     });
 
-    // Individual Card Counter Update
-    cards.forEach((card, index) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 60%',
-        end: 'bottom 60%',
-        onEnter: () => {
-          if (window.getComputedStyle(card).display !== 'none') {
-            if (counter) counter.textContent = `${index + 1}`;
-          }
-        },
-        onEnterBack: () => {
-          if (window.getComputedStyle(card).display !== 'none') {
-            if (counter) counter.textContent = `${index + 1}`;
-          }
-        },
-      });
-    });
+    // Individual Card Counter Update - REMOVED, now handled by setupFloatingCounterScrollTriggers()
+    // cards.forEach((card, index) => {
+    //   ScrollTrigger.create({
+    //     trigger: card,
+    //     start: 'top 60%',
+    //     end: 'bottom 60%',
+    //     onEnter: () => {
+    //       if (window.getComputedStyle(card).display !== 'none') {
+    //         if (counter) counter.textContent = `${index + 1}`;
+    //       }
+    //     },
+    //     onEnterBack: () => {
+    //       if (window.getComputedStyle(card).display !== 'none') {
+    //         if (counter) counter.textContent = `${index + 1}`;
+    //       }
+    //     },
+    //   });
+    // });
+    this.setupFloatingCounterScrollTriggers(); // Initial call to setup floating counter after other animations
   }
 }
