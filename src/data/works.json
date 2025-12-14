@@ -1,0 +1,458 @@
+[
+  {
+    "no": 1,
+    "category": "Web",
+    "project_name": "Edwards Quiz Promotion",
+    "client": "Edwards Lifesciences",
+    "tech_stack": [
+      "PHP",
+      "MySQL",
+      "Session Logic"
+    ],
+    "media_type": null,
+    "key_features": [
+      "이어풀기(Resume) 로직 구현",
+      "폐쇄형 간편 인증 게이트",
+      "참여자 통계 관리자 모드"
+    ],
+    "thumbnail": "/images/001.png",
+    "video_src": null
+  },
+  {
+    "no": 2,
+    "category": "Web",
+    "project_name": "DORCO Global Promotion",
+    "client": "DORCO",
+    "tech_stack": [
+      "HTML5",
+      "i18n",
+      "Ajax",
+      "PHP"
+    ],
+    "media_type": null,
+    "key_features": [
+      "5개국어 지원 i18n 아키텍처",
+      "DB 트랜잭션 자동 마감 시스템",
+      "국가별 유동적 입력 폼"
+    ],
+    "thumbnail": "/images/002.png",
+    "video_src": null
+  },
+  {
+    "no": 3,
+    "category": "Web",
+    "project_name": "Altum Partners Corporate",
+    "client": "Altum Partners",
+    "tech_stack": [
+      "Responsive Grid",
+      "CSS Animation"
+    ],
+    "media_type": null,
+    "key_features": [
+      "신뢰도 중심의 미니멀 UI",
+      "정보 구조화(IA) 및 적응형 그리드",
+      "모바일 가독성 최적화"
+    ],
+    "thumbnail": "/images/003.png",
+    "video_src": null
+  },
+  {
+    "no": 4,
+    "category": "Web",
+    "project_name": "Dong-A ST Logistics System",
+    "client": "Dong-A ST",
+    "tech_stack": [
+      "Board System",
+      "Data Grid",
+      "PHP",
+      "Laravel",
+      "Bulk Logic"
+    ],
+    "media_type": null,
+    "key_features": [
+      "B2B 대량 발주 인터페이스",
+      "정기 배송 스케줄링 로직",
+      "지점별 실시간 주문 현황판"
+    ],
+    "thumbnail": "/images/004.png",
+    "video_src": null
+  },
+  {
+    "no": 5,
+    "category": "Web",
+    "project_name": "Mr. Hyang Brand Web",
+    "client": "Mr. Hyang",
+    "tech_stack": [
+      "CTA Optimization",
+      "CSS Animation",
+      "Lazy Loading"
+    ],
+    "media_type": null,
+    "key_features": [
+      "주문 전환율 극대화(Floating CTA)",
+      "가맹 상담 리드 관리 시스템",
+      "모바일 최적화 고해상도 이미지"
+    ],
+    "thumbnail": "/images/005.png",
+    "video_src": null
+  },
+  {
+    "no": 6,
+    "category": "Web",
+    "project_name": "Samsung Health Promotion",
+    "client": "SAMSUNG Electronics",
+    "tech_stack": [
+      "Mobile-First",
+      "Data Visualization"
+    ],
+    "media_type": null,
+    "key_features": [
+      "헬스 데이터 시각화(Chart/Gauge)",
+      "모바일 퍼스트 스토리텔링 UI",
+      "앱 튜토리얼 인터랙션"
+    ],
+    "thumbnail": "/images/006.png",
+    "video_src": null
+  },
+  {
+    "no": 7,
+    "category": "Web",
+    "project_name": "Samsung SmartThings",
+    "client": "SAMSUNG Electronics",
+    "tech_stack": [
+      "JS GIF Control",
+      "Memory Opt",
+      "GA"
+    ],
+    "media_type": null,
+    "key_features": [
+      "TV 브라우저 렌더링 최적화",
+      "JS 기반 GIF 프레임 제어 엔진",
+      "크로스 플랫폼(Mobile/TV) 대응"
+    ],
+    "thumbnail": "/images/007.png",
+    "video_src": null
+  },
+  {
+    "no": 8,
+    "category": "Web",
+    "project_name": "Edwards TAVI Portal",
+    "client": "Edwards Lifesciences",
+    "tech_stack": [
+      "OAuth 2.0",
+      "AWS",
+      "WORDPRESS",
+      "Google Maps API"
+    ],
+    "media_type": null,
+    "key_features": [
+      "메디게이트 API 연동(SSO)",
+      "AWS 기반 고가용성 인프라",
+      "위치 기반 시술 센터 찾기(LBS)"
+    ],
+    "thumbnail": "/images/008.png",
+    "video_src": null
+  },
+  {
+    "no": 9,
+    "category": "Web",
+    "project_name": "Big Hit Global Audition",
+    "client": "Big Hit Entertainment",
+    "tech_stack": [
+      "React.js",
+      "AWS Serverless",
+      "QR Logic"
+    ],
+    "media_type": null,
+    "key_features": [
+      "QR 코드 클라이언트 실시간 생성",
+      "트래픽 폭주 대응(Auto-Scaling)",
+      "글로벌 다국어 지원 시스템"
+    ],
+    "thumbnail": "/images/009.png",
+    "video_src": null
+  },
+  {
+    "no": 10,
+    "category": "Web",
+    "project_name": "ICEAGE Brand Web",
+    "client": "ICEAGE",
+    "tech_stack": [
+      "Parallax Scrolling",
+      "PHP Board"
+    ],
+    "media_type": null,
+    "key_features": [
+      "패럴랙스 스크롤링 인터랙션",
+      "브랜드 스토리텔링 경험 제공",
+      "B2B/B2C 통합 문의 시스템"
+    ],
+    "thumbnail": "/images/010.png",
+    "video_src": null
+  },
+  {
+    "no": 11,
+    "category": "Web",
+    "project_name": "Pfizer R.E.D Campaign",
+    "client": "Pfizer",
+    "tech_stack": [
+      "Interactive Form",
+      "PHP",
+      "Survey Logic"
+    ],
+    "media_type": null,
+    "key_features": [
+      "조건부 설문 로직(Skip Logic)",
+      "캠페인 참여 데이터, 패키지 신청/배송/재고 관리 통합 어드민",
+      "웹 내장 커스텀 미디어 플레이어"
+    ],
+    "thumbnail": "/images/011.png",
+    "video_src": null
+  },
+  {
+    "no": 12,
+    "category": "SaaS",
+    "project_name": "Dining Manager SaaS",
+    "client": "Own Service",
+    "tech_stack": [
+      "Kakao Biz API",
+      "Gantt Chart UI",
+      "Android",
+      "IOS",
+      "SaaS"
+    ],
+    "media_type": null,
+    "key_features": [
+      "카카오 알림톡 자동 발송 연동",
+      "드래그 앤 드롭 간트 차트 UI",
+      "실시간 데이터 동기화(Cloud DB)"
+    ],
+    "thumbnail": "/images/012.png",
+    "video_src": null
+  },
+  {
+    "no": 13,
+    "category": "Kiosk",
+    "project_name": "IPSEN Kiosk",
+    "client": "IPSEN",
+    "tech_stack": [
+      "Adobe AIR",
+      "SQLite",
+      "ActionScript",
+      "Touch Event"
+    ],
+    "media_type": null,
+    "key_features": [
+      "네트워크 독립형(Standalone) 구동",
+      "로컬 DB 기반 디지털 방명록",
+      "터치 제스처 문서 뷰어 엔진"
+    ],
+    "thumbnail": "/images/013.png",
+    "video_src": null
+  },
+  {
+    "no": 14,
+    "category": "SaaS",
+    "project_name": "nPlaceUp Analysis SaaS",
+    "client": "Own Service",
+    "tech_stack": [
+      "Node.js",
+      "Python FastAPI",
+      "Headless WP"
+    ],
+    "media_type": null,
+    "key_features": [
+      "10초 이내 초고속 분석 엔진",
+      "비동기/병렬 크롤링 아키텍처",
+      "데이터 기반 네이버 플레이스 지수 산출"
+    ],
+    "thumbnail": "/images/014.png",
+    "video_src": null
+  },
+  {
+    "no": 15,
+    "category": "Web",
+    "project_name": "GCF e-Learning System",
+    "client": "Green Climate Fund",
+    "tech_stack": [
+      "iSpring Suite",
+      "HTML5",
+      "LMS"
+    ],
+    "media_type": null,
+    "key_features": [
+      "경량화된 LMS 기능(진도/퀴즈)",
+      "PPT to HTML5 웹 표준 변환",
+      "UN 공용어 포함 4개국어 지원"
+    ],
+    "thumbnail": "/images/015.png",
+    "video_src": null
+  },
+  {
+    "no": 16,
+    "category": "Web",
+    "project_name": "Online Booth Platform",
+    "client": "Boston Scientific / MicroPort",
+    "tech_stack": [
+      "2.5D Mapping",
+      "Interactive Hotspot"
+    ],
+    "media_type": null,
+    "key_features": [
+      "웹 최적화 2.5D 이미지 맵핑",
+      "반응형 핫스팟 인터랙션",
+      "비대면 리드(Lead) 수집 기능"
+    ],
+    "thumbnail": "/images/016.png",
+    "video_src": null
+  },
+  {
+    "no": 17,
+    "category": "Motion & Video",
+    "project_name": "Salvation Army Animation",
+    "client": "The Salvation Army",
+    "tech_stack": [
+      "Character Rigging",
+      "Storytelling"
+    ],
+    "media_type": "video",
+    "key_features": [
+      "감성적 동화풍 아트 스타일",
+      "자연스러운 캐릭터 리깅 애니메이션",
+      "기부 독려 스토리텔링 연출"
+    ],
+    "thumbnail": "/images/017.png",
+    "video_src": "/videos/017.mp4"
+  },
+  {
+    "no": 18,
+    "category": "Motion & Video",
+    "project_name": "Eisai Medical Infographic",
+    "client": "Eisai",
+    "tech_stack": [
+      "MOA Visualization",
+      "3D Motion",
+      "Typography"
+    ],
+    "media_type": "video",
+    "key_features": [
+      "약물 기전(MOA) 3D 시각화",
+      "복잡한 데이터의 인포그래픽 변환",
+      "전시/학회용 가독성 최적화"
+    ],
+    "thumbnail": "/images/018.png",
+    "video_src": "/videos/018.mp4"
+  },
+  {
+    "no": 19,
+    "category": "Motion & Video",
+    "project_name": "4 ELEMENTS ONE",
+    "client": "4 ELEMENTS ONE",
+    "tech_stack": [
+      "Kinetic Typography",
+      "Isometric Projection",
+      "Shape Layer Animation"
+    ],
+    "media_type": "video",
+    "key_features": [
+      "레트로 팝 컬러와 기하학적 패턴의 조화",
+      "인스타그램 광고 최적화",
+      "주목도 높은 타이포그래피 모션"
+    ],
+    "thumbnail": "/images/019.png",
+    "video_src": "/videos/019.mp4"
+  },
+  {
+    "no": 20,
+    "category": "Branding & Design",
+    "project_name": "Piyang-ok Branding",
+    "client": "Piyang-ok",
+    "tech_stack": [
+      "Brand Identity",
+      "Color System"
+    ],
+    "media_type": null,
+    "key_features": [
+      "노포의 신뢰감과 세련미(Modernism)",
+      "전용 컬러 팔레트 및 로고 타입",
+      "통합 브랜드 경험(BX) 설계"
+    ],
+    "thumbnail": "/images/020.png",
+    "video_src": null
+  },
+  {
+    "no": 21,
+    "category": "Branding & Design",
+    "project_name": "Rang-maek Branding",
+    "client": "Rang-maek",
+    "tech_stack": [
+      "Logo Design",
+      "Illustration",
+      "Newtro"
+    ],
+    "media_type": null,
+    "key_features": [
+      "얼음 결정을 형상화한 타이포그래피",
+      "뉴트로(Newtro) 컨셉 일러스트",
+      "맥주 전문점 정체성 엠블럼"
+    ],
+    "thumbnail": "/images/021.png",
+    "video_src": null
+  },
+  {
+    "no": 22,
+    "category": "Branding & Design",
+    "project_name": "Ililhyang Menu & Print",
+    "client": "Ililhyang",
+    "tech_stack": [
+      "Editorial Design",
+      "Photo Retouching"
+    ],
+    "media_type": null,
+    "key_features": [
+      "주문 유도형 메뉴 아키텍처",
+      "식감 강조 사진 리터칭",
+      "시선 이동을 고려한 레이아웃"
+    ],
+    "thumbnail": "/images/022.png",
+    "video_src": null
+  },
+  {
+    "no": 23,
+    "category": "Motion & Video",
+    "project_name": "Cham-Bareun Brand Film",
+    "client": "Cham-Bareun",
+    "tech_stack": [
+      "Sizzle Cut",
+      "Color Grading",
+      "Kinetic Typography"
+    ],
+    "media_type": "video",
+    "key_features": [
+      "매장용 메뉴 롤링 영상 제작",
+      "식욕 자극 씨즐(Sizzle) 효과",
+      "푸드 특화 컬러 그레이딩"
+    ],
+    "thumbnail": "/images/023.png",
+    "video_src": "/videos/023.mp4"
+  },
+  {
+    "no": 24,
+    "category": "Motion & Video",
+    "project_name": "Table Order Event",
+    "client": "Cham-Bareun",
+    "tech_stack": [
+      "Product Compositing",
+      "Particle & Bokeh Effects",
+      "2D Motion Typography"
+    ],
+    "media_type": "video",
+    "key_features": [
+      "테이블 오더에 최적화된 가독성 레이아웃",
+      "시즌 이슈(크리스마스/겨울)를 활용한 무드 조성",
+      "직관적인 혜택 강조(군만두 서비스)로 주문 유도"
+    ],
+    "thumbnail": "/images/024.png",
+    "video_src": "/videos/024.mp4"
+  }
+]
