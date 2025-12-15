@@ -49,7 +49,7 @@ lenis.on('scroll', (e: any) => {
 
     // Blur intensity based on velocity
     const velocity = Math.abs(e.velocity);
-    const blurAmount = Math.min(velocity * 0.1, 5); // Reduced intensity for performance
+    const blurAmount = Math.min(velocity * 0.15, 5); // Reduced intensity for performance
 
     if (blurAmount > 0.1) {
       blurFilter.setAttribute('stdDeviation', `0 ${blurAmount}`);
