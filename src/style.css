@@ -89,6 +89,7 @@ body::-webkit-scrollbar,
   width: 100%;
   min-height: 100vh;
   position: relative;
+  overflow-x: clip;
   /* filter: url('#vertical-blur'); Removed to fix sticky/fixed positioning */
 }
 
