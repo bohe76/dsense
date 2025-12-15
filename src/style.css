@@ -492,13 +492,7 @@ ul {
   background: linear-gradient(to bottom, transparent, #050505);
 }
 
-.hero-image {
-  width: 100%;
-  height: 100%;
-  background-image: url('/hero-bg.png');
-  background-size: cover;
-  background-position: center;
-}
+
 
 .scroll-indicator {
   position: absolute;
@@ -753,8 +747,10 @@ ul {
 .work-card {
   display: flex;
   flex-direction: column;
-  opacity: 1; /* 애니메이션 효과 제거를 위해 1로 변경 */
-  transform: none; /* 애니메이션 효과 제거를 위해 none으로 변경 */
+  opacity: 1;
+  /* 애니메이션 효과 제거를 위해 1로 변경 */
+  transform: none;
+  /* 애니메이션 효과 제거를 위해 none으로 변경 */
   cursor: pointer;
   background-color: #ffffff;
   padding: 0;

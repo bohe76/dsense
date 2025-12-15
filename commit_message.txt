@@ -1,3 +1,4 @@
-chore: three.js 타입 정의 패키지(@types/three) 추가
+chore: Hero 섹션 리팩토링 후 미사용 자산(hero-bg.png) 백업 및 Dead CSS 제거
 
-- IDE 및 TypeScript 컴파일러에서 'three' 모듈을 찾지 못하는 에러 해결을 위해 @types/three 개발 의존성 추가
+- public/hero-bg.png를 _assets_backup 폴더로 이동하여 배포 패키지에서 제외 및 원본 보존
+- src/style.css에서 더 이상 사용되지 않는 .hero-image 스타일 클래스 삭제
