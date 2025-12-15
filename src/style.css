@@ -1363,9 +1363,16 @@ ul {
   filter: brightness(1.1);
 }
 
-.filter-chip.is-hovered {
-  transform: translateY(-4px);
+/* Apply Translation Only on PC (Hover capable) */
+@media (hover: hover) {
+
+  .filter-chip:hover,
+  .filter-chip.is-hovered {
+    transform: translateY(-4px);
+  }
 }
+
+/* Mobile: No translation on hover/touch, just color/brightness */
 
 
 
