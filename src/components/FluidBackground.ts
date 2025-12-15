@@ -143,43 +143,10 @@ function createFBO(width: number, height: number, type: THREE.TextureDataType) {
 }
 
 export class FluidBackground {
-  private container: HTMLElement;
-  private renderer: THREE.WebGLRenderer;
-  private scene: THREE.Scene;
-  private camera: THREE.OrthographicCamera;
-  private mesh: THREE.Mesh;
-
-  // Simulation resolution
-  private simResX = 128;
-  private simResY = 128;
-
-  // FBOs
-  private density: any;
-  private velocity: any;
-  private pressure: any;
-  private divergence: THREE.WebGLRenderTarget;
-
-  // Materials
-  private splatMaterial: THREE.ShaderMaterial;
-
-  private advectionMaterial: THREE.ShaderMaterial;
-  private divergenceMaterial: THREE.ShaderMaterial;
-  private pressureMaterial: THREE.ShaderMaterial;
-  private gradientSubtractMaterial: THREE.ShaderMaterial;
-  private displayMaterial: THREE.ShaderMaterial;
-
-  // Interaction
-  private lastMouse = new THREE.Vector2();
-  private splatStack: Array<{
-    x: number;
-    y: number;
-    dx: number;
-    dy: number;
-    color: THREE.Vector3;
-  }> = [];
-
-  // Animation
-  private lastTime = 0;
+  // Optimize: Intersection Observer to pause when not visible
+  private observer: IntersectionObserver | null = null;
+  private isVisible = true;
+  private animationId: number | null = null;
 
   constructor(containerInfo: HTMLElement) {
     this.container = containerInfo;
@@ -323,6 +290,36 @@ export class FluidBackground {
         ).multiplyScalar(5.0), // Bright colors
       });
     }
+
+    // --- Optimization: IntersectionObserver ---
+    this.initObserver();
+  }
+
+  private initObserver() {
+    const options = {
+      root: null, // Viewport
+      threshold: 0, // Trigger as soon as 1px is visible/hidden
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.isVisible = true;
+          if (!this.animationId) {
+            this.lastTime = performance.now(); // Reset time to prevent huge delta
+            this.animate();
+          }
+        } else {
+          this.isVisible = false;
+          if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+          }
+        }
+      });
+    }, options);
+
+    this.observer.observe(this.container);
   }
 
   onResize() {
@@ -334,6 +331,8 @@ export class FluidBackground {
   }
 
   onMouseMove(e: MouseEvent) {
+    if (!this.isVisible) return; // Ignore events when invisible
+
     const x = e.clientX / window.innerWidth;
     const y = 1.0 - e.clientY / window.innerHeight; // Flip Y
 
@@ -358,7 +357,7 @@ export class FluidBackground {
   // Device orientation handler - tilt phone to move fluid (Mobile only, sensitive)
   private lastOrientation = { beta: 0, gamma: 0 };
   onDeviceOrientation(e: DeviceOrientationEvent) {
-    if (e.beta === null || e.gamma === null) return;
+    if (!this.isVisible || e.beta === null || e.gamma === null) return;
 
     // Smooth the values
     const beta = e.beta; // Front-back tilt (-180 to 180)
@@ -465,6 +464,8 @@ export class FluidBackground {
   }
 
   animate() {
+    if (!this.isVisible) return; // Double check
+
     const now = performance.now();
     let dt = (now - this.lastTime) / 1000;
     dt = Math.min(dt, 0.02); // Cap Max DT
@@ -472,12 +473,16 @@ export class FluidBackground {
 
     this.step(dt);
 
-    requestAnimationFrame(this.animate.bind(this));
+    this.animationId = requestAnimationFrame(this.animate.bind(this));
   }
 
   dispose() {
     // Cleanup WebGL resources
     this.renderer.dispose();
-    // ... dispose textures/materials
+
+    // Cleanup Observer
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 }
