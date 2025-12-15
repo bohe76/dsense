@@ -58,17 +58,17 @@ export class ProjectList {
           <span class="chip-text">ALL</span>
         </div>
         ${this.allCategories
-        .map(
-          (cat) => {
-            const isActive = this.activeCategories.includes(cat) ? '' : 'inactive'; // In "Select Mode", only selected are active.
+          .map((cat) => {
+            const isActive = this.activeCategories.includes(cat)
+              ? ''
+              : 'inactive'; // In "Select Mode", only selected are active.
             return `
             <div class="filter-chip ${isActive}" data-cat="${cat}" data-initial="${cat.charAt(0)}">
               <span class="chip-text">${cat}</span>
             </div>
           `;
-          }
-        )
-        .join('')}
+          })
+          .join('')}
       </div>
     `;
 
@@ -93,24 +93,24 @@ export class ProjectList {
         <!-- 3-Column Grid -->
         <div class="project-grid-3col">
           ${this.projects
-        .map((work) => {
-          // Add a wrapper or inject data-category into the card for easy filtering
-          // Since createProjectCard returns a string, we need to ensure the root element has the category
-          // We can do this by wrapping or modifying createProjectCard.
-          // Currently createProjectCard returns a div with class "work-card group".
-          // We'll wrap it or better yet, simply rely on the fact createProjectCard adds data-id,
-          // but for filtering performance, data-category on the card is best.
-          // Let's modify the string slightly to include data-category if ProjectCard doesn't already (it uses data-cat inside for the chip).
-          // Actually, ProjectCard.ts adds data-id. We will inject data-category into the card string here using replace.
+            .map((work) => {
+              // Add a wrapper or inject data-category into the card for easy filtering
+              // Since createProjectCard returns a string, we need to ensure the root element has the category
+              // We can do this by wrapping or modifying createProjectCard.
+              // Currently createProjectCard returns a div with class "work-card group".
+              // We'll wrap it or better yet, simply rely on the fact createProjectCard adds data-id,
+              // but for filtering performance, data-category on the card is best.
+              // Let's modify the string slightly to include data-category if ProjectCard doesn't already (it uses data-cat inside for the chip).
+              // Actually, ProjectCard.ts adds data-id. We will inject data-category into the card string here using replace.
 
-          const cardHtml = createProjectCard(work, work.thumbnail);
-          // Inject data-category attribute into the opening tag of the card
-          return cardHtml.replace(
-            'class="work-card group"',
-            `class="work-card group" data-category="${work.category}"`
-          );
-        })
-        .join('')}
+              const cardHtml = createProjectCard(work, work.thumbnail);
+              // Inject data-category attribute into the opening tag of the card
+              return cardHtml.replace(
+                'class="work-card group"',
+                `class="work-card group" data-category="${work.category}"`
+              );
+            })
+            .join('')}
         </div>
         
         <!-- Floating Mobile Counter -->
@@ -169,12 +169,13 @@ export class ProjectList {
         chip.classList.remove('is-hovered');
       });
     });
-
   }
 
   toggleCategory(category: string, chipElement: HTMLElement) {
     const allChip = this.element.querySelector('.filter-chip[data-cat="ALL"]');
-    const otherChips = this.element.querySelectorAll('.filter-chip:not([data-cat="ALL"])');
+    const otherChips = this.element.querySelectorAll(
+      '.filter-chip:not([data-cat="ALL"])'
+    );
 
     if (category === 'ALL') {
       // 1. Clicked ALL: Clear selection (Show All)
@@ -182,8 +183,7 @@ export class ProjectList {
 
       // Update UI
       if (allChip) allChip.classList.remove('inactive');
-      otherChips.forEach(chip => chip.classList.add('inactive'));
-
+      otherChips.forEach((chip) => chip.classList.add('inactive'));
     } else {
       // 2. Clicked Specific Category
       const index = this.activeCategories.indexOf(category);
@@ -208,8 +208,12 @@ export class ProjectList {
     this.filterProjects();
 
     // Auto-Scroll to Filter Top if we are below it
-    const filterContainer = this.element.querySelector('.category-filter-container') as HTMLElement;
-    const sentinel = this.element.querySelector('.filter-sentinel') as HTMLElement;
+    const filterContainer = this.element.querySelector(
+      '.category-filter-container'
+    ) as HTMLElement;
+    const sentinel = this.element.querySelector(
+      '.filter-sentinel'
+    ) as HTMLElement;
 
     if (filterContainer && sentinel) {
       // Use requestAnimationFrame to let DOM update first (cards appearing/disappearing changes height)
@@ -221,7 +225,8 @@ export class ProjectList {
 
         const lenis = (window as any).lenis;
         // Recalculate positions after DOM update
-        const absoluteSentinelTop = window.scrollY + sentinel.getBoundingClientRect().top;
+        const absoluteSentinelTop =
+          window.scrollY + sentinel.getBoundingClientRect().top;
         const targetScrollY = absoluteSentinelTop - targetOffset;
 
         // Only scroll if we are BELOW the target position (plus disjoint margin)
@@ -231,7 +236,7 @@ export class ProjectList {
             lenis.scrollTo(targetScrollY, {
               duration: 0.6,
               easing: (t: number) => 1 - Math.pow(1 - t, 3), // Cubic.out
-              immediate: false
+              immediate: false,
             });
             // Disable motion blur after animation duration
             setTimeout(() => {
@@ -258,7 +263,9 @@ export class ProjectList {
   }
 
   filterProjects() {
-    const grid = this.element.querySelector('.project-grid-3col') as HTMLElement;
+    const grid = this.element.querySelector(
+      '.project-grid-3col'
+    ) as HTMLElement;
     if (!grid) return;
 
     const cards = Array.from(
@@ -271,7 +278,9 @@ export class ProjectList {
 
       // If categories is empty, it means "ALL" mode -> show everything.
       // Otherwise, check if category is in the array.
-      const isVisible = this.activeCategories.length === 0 || (cardCategory && this.activeCategories.includes(cardCategory));
+      const isVisible =
+        this.activeCategories.length === 0 ||
+        (cardCategory && this.activeCategories.includes(cardCategory));
 
       if (isVisible) {
         card.style.display = 'block';
@@ -282,7 +291,9 @@ export class ProjectList {
 
     // Second pass: Reorder visible cards based on activeCategories priority
     if (this.activeCategories.length > 0) {
-      const visibleCards = cards.filter(card => card.style.display !== 'none');
+      const visibleCards = cards.filter(
+        (card) => card.style.display !== 'none'
+      );
 
       // Sort by category priority (index in activeCategories: lower = higher priority)
       visibleCards.sort((a, b) => {
@@ -294,7 +305,7 @@ export class ProjectList {
       });
 
       // Re-append sorted cards to grid
-      visibleCards.forEach(card => grid.appendChild(card));
+      visibleCards.forEach((card) => grid.appendChild(card));
     }
 
     this.updateSectionProjectCount(); // Update the section header count after filtering

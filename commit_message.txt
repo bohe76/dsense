@@ -1,9 +1,4 @@
-feat(ui): 필터 로직 'ALL + 선택 모드'로 변경 및 디자인 개선
+chore: CRLF → LF 줄바꿈 포맷 통일 (lint --fix)
 
-- ProjectList.ts:
-  - 'ALL' 칩 추가 및 기본 활성화 (Active Categories가 비어있으면 전체 보기)
-  - 필터 동작 방식 변경: '차감' 방식에서 '선택' 방식으로 전환 (ALL 클릭 시 초기화, 개별 칩 클릭 시 ALL 해제)
-  - 템플릿 리터럴 렌더링 버그 수정 (.join 텍스트 노출 문제)
-- style.css:
-  - 'ALL' 칩 전용 스타일 적용: Active 시 #2c2c2c Fill, Inactive 시 Outline
-  - 모바일 예외 처리: 'ALL' 칩은 원형이 아닌 Pill 형태로 전체 텍스트('ALL') 노출 (data-initial="ALL")
+- 모든 TypeScript 파일 줄바꿈을 LF로 변환
+- prettier/prettier 린트 에러 1026개 해결
