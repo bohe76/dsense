@@ -54,7 +54,7 @@ html.lenis {
 html {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  /* overflow-x: hidden; Removed to fix sticky positioning */
   scrollbar-width: none;
   /* Firefox */
   -ms-overflow-style: none;
@@ -67,7 +67,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-main);
-  overflow-x: hidden;
+  /* overflow-x: hidden; Removed to fix sticky positioning */
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.02em;
@@ -89,8 +89,7 @@ body::-webkit-scrollbar,
   width: 100%;
   min-height: 100vh;
   position: relative;
-  filter: url('#vertical-blur');
-  /* Dynamic Motion Blur */
+  /* filter: url('#vertical-blur'); Removed to fix sticky/fixed positioning */
 }
 
 .mix-difference {
