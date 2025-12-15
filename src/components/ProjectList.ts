@@ -9,7 +9,7 @@ export class ProjectList {
   private element: HTMLElement;
   private projects: WorkItem[];
   private videoModal: VideoModal;
-  private activeCategories: Set<string>;
+  private activeCategories: string[]; // Ordered array: last-clicked first
   private allCategories: string[];
   private projectCountSpan: HTMLElement | null = null;
   private floatingCounterScrollTriggers: ScrollTrigger[] = []; // New property to store ScrollTrigger instances
@@ -26,7 +26,7 @@ export class ProjectList {
       new Set(this.projects.map((p) => p.category))
     );
     // Initialize active categories (empty = ALL)
-    this.activeCategories = new Set();
+    this.activeCategories = [];
 
     this.render();
     this.attachEvents();
@@ -48,7 +48,7 @@ export class ProjectList {
     };
 
     // Determine if ALL is active (no specific categories selected)
-    const isAllActive = this.activeCategories.size === 0 ? '' : 'inactive';
+    const isAllActive = this.activeCategories.length === 0 ? '' : 'inactive';
 
     // Generate Filter Chips HTML
     const filterHtml = `
@@ -60,7 +60,7 @@ export class ProjectList {
         ${this.allCategories
         .map(
           (cat) => {
-            const isActive = this.activeCategories.has(cat) ? '' : 'inactive'; // In "Select Mode", only selected are active.
+            const isActive = this.activeCategories.includes(cat) ? '' : 'inactive'; // In "Select Mode", only selected are active.
             return `
             <div class="filter-chip ${isActive}" data-cat="${cat}" data-initial="${cat.charAt(0)}">
               <span class="chip-text">${cat}</span>
@@ -178,7 +178,7 @@ export class ProjectList {
 
     if (category === 'ALL') {
       // 1. Clicked ALL: Clear selection (Show All)
-      this.activeCategories.clear();
+      this.activeCategories = [];
 
       // Update UI
       if (allChip) allChip.classList.remove('inactive');
@@ -186,18 +186,19 @@ export class ProjectList {
 
     } else {
       // 2. Clicked Specific Category
-      if (this.activeCategories.has(category)) {
-        // Turn OFF
-        this.activeCategories.delete(category);
+      const index = this.activeCategories.indexOf(category);
+      if (index !== -1) {
+        // Turn OFF: Remove from array
+        this.activeCategories.splice(index, 1);
         chipElement.classList.add('inactive');
       } else {
-        // Turn ON
-        this.activeCategories.add(category);
+        // Turn ON: Add to FRONT of array (last-clicked = first displayed)
+        this.activeCategories.unshift(category);
         chipElement.classList.remove('inactive');
       }
 
       // 3. Logic Check: If nothing selected, revert to ALL
-      if (this.activeCategories.size === 0) {
+      if (this.activeCategories.length === 0) {
         if (allChip) allChip.classList.remove('inactive');
       } else {
         if (allChip) allChip.classList.add('inactive');
@@ -257,6 +258,9 @@ export class ProjectList {
   }
 
   filterProjects() {
+    const grid = this.element.querySelector('.project-grid-3col') as HTMLElement;
+    if (!grid) return;
+
     const cards = Array.from(
       this.element.querySelectorAll('.work-card')
     ) as HTMLElement[];
@@ -266,8 +270,8 @@ export class ProjectList {
       const cardCategory = card.getAttribute('data-category');
 
       // If categories is empty, it means "ALL" mode -> show everything.
-      // Otherwise, check if category is in the set.
-      const isVisible = this.activeCategories.size === 0 || (cardCategory && this.activeCategories.has(cardCategory));
+      // Otherwise, check if category is in the array.
+      const isVisible = this.activeCategories.length === 0 || (cardCategory && this.activeCategories.includes(cardCategory));
 
       if (isVisible) {
         card.style.display = 'block';
@@ -275,6 +279,23 @@ export class ProjectList {
         card.style.display = 'none';
       }
     });
+
+    // Second pass: Reorder visible cards based on activeCategories priority
+    if (this.activeCategories.length > 0) {
+      const visibleCards = cards.filter(card => card.style.display !== 'none');
+
+      // Sort by category priority (index in activeCategories: lower = higher priority)
+      visibleCards.sort((a, b) => {
+        const catA = a.getAttribute('data-category') || '';
+        const catB = b.getAttribute('data-category') || '';
+        const indexA = this.activeCategories.indexOf(catA);
+        const indexB = this.activeCategories.indexOf(catB);
+        return indexA - indexB;
+      });
+
+      // Re-append sorted cards to grid
+      visibleCards.forEach(card => grid.appendChild(card));
+    }
 
     this.updateSectionProjectCount(); // Update the section header count after filtering
     ScrollTrigger.refresh();
