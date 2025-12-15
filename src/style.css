@@ -51,6 +51,13 @@ html.lenis {
   overflow: hidden;
 }
 
+html {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -66,7 +73,9 @@ body {
   /* IE/Edge */
 }
 
-/* Hide Scrollbar - Clean UI across all backgrounds */
+/* Hide Scrollbar - Clean UI across all backgrounds (Mobile + Desktop) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
 ::-webkit-scrollbar {
   display: none;
 }
