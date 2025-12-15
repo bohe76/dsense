@@ -25,8 +25,8 @@ export class ProjectList {
     this.allCategories = Array.from(
       new Set(this.projects.map((p) => p.category))
     );
-    // Initialize active categories (all enabled by default)
-    this.activeCategories = new Set(this.allCategories);
+    // Initialize active categories (empty = ALL)
+    this.activeCategories = new Set();
 
     this.render();
     this.attachEvents();
@@ -47,16 +47,26 @@ export class ProjectList {
         .join('');
     };
 
+    // Determine if ALL is active (no specific categories selected)
+    const isAllActive = this.activeCategories.size === 0 ? '' : 'inactive';
+
     // Generate Filter Chips HTML
     const filterHtml = `
       <div class="category-filter-container">
+        <!-- ALL Chip -->
+        <div class="filter-chip ${isAllActive}" data-cat="ALL" data-initial="ALL">
+          <span class="chip-text">ALL</span>
+        </div>
         ${this.allCategories
         .map(
-          (cat) => `
-          <div class="filter-chip" data-cat="${cat}" data-initial="${cat.charAt(0)}">
-            <span class="chip-text">${cat}</span>
-          </div>
-        `
+          (cat) => {
+            const isActive = this.activeCategories.has(cat) ? '' : 'inactive'; // In "Select Mode", only selected are active.
+            return `
+            <div class="filter-chip ${isActive}" data-cat="${cat}" data-initial="${cat.charAt(0)}">
+              <span class="chip-text">${cat}</span>
+            </div>
+          `;
+          }
         )
         .join('')}
       </div>
@@ -163,16 +173,35 @@ export class ProjectList {
   }
 
   toggleCategory(category: string, chipElement: HTMLElement) {
-    if (this.activeCategories.has(category)) {
-      // Turn OFF
-      // Prevent turning off all categories if you want at least one? (Optional rule)
-      // For now allow all off.
-      this.activeCategories.delete(category);
-      chipElement.classList.add('inactive');
+    const allChip = this.element.querySelector('.filter-chip[data-cat="ALL"]');
+    const otherChips = this.element.querySelectorAll('.filter-chip:not([data-cat="ALL"])');
+
+    if (category === 'ALL') {
+      // 1. Clicked ALL: Clear selection (Show All)
+      this.activeCategories.clear();
+
+      // Update UI
+      if (allChip) allChip.classList.remove('inactive');
+      otherChips.forEach(chip => chip.classList.add('inactive'));
+
     } else {
-      // Turn ON
-      this.activeCategories.add(category);
-      chipElement.classList.remove('inactive');
+      // 2. Clicked Specific Category
+      if (this.activeCategories.has(category)) {
+        // Turn OFF
+        this.activeCategories.delete(category);
+        chipElement.classList.add('inactive');
+      } else {
+        // Turn ON
+        this.activeCategories.add(category);
+        chipElement.classList.remove('inactive');
+      }
+
+      // 3. Logic Check: If nothing selected, revert to ALL
+      if (this.activeCategories.size === 0) {
+        if (allChip) allChip.classList.remove('inactive');
+      } else {
+        if (allChip) allChip.classList.add('inactive');
+      }
     }
 
     this.filterProjects();
@@ -235,7 +264,10 @@ export class ProjectList {
     // First pass: toggle display
     cards.forEach((card) => {
       const cardCategory = card.getAttribute('data-category');
-      const isVisible = cardCategory && this.activeCategories.has(cardCategory);
+
+      // If categories is empty, it means "ALL" mode -> show everything.
+      // Otherwise, check if category is in the set.
+      const isVisible = this.activeCategories.size === 0 || (cardCategory && this.activeCategories.has(cardCategory));
 
       if (isVisible) {
         card.style.display = 'block';

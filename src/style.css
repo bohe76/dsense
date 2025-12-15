@@ -1150,6 +1150,21 @@ ul {
   z-index: 1;
 }
 
+/* ALL Chip Specific Style */
+/* Active: Filled */
+.filter-chip[data-cat="ALL"]:not(.inactive) {
+  background: #2c2c2c;
+  color: #ffffff;
+  border-color: #2c2c2c;
+}
+
+/* Inactive: Outline */
+.filter-chip.inactive[data-cat="ALL"] {
+  background: transparent !important;
+  color: #2c2c2c;
+  border-color: #2c2c2c;
+}
+
 /* Mobile: Circular First-Letter Chip */
 @media (max-width: 768px) {
   .category-filter-container {
@@ -1179,6 +1194,14 @@ ul {
     /* Show first letter */
     font-size: 0.9rem;
     font-weight: 700;
+  }
+
+  /* Exception for ALL Chip on Mobile: Pill Shape */
+  .filter-chip[data-cat="ALL"] {
+    width: auto;
+    padding: 0 12px;
+    border-radius: 20px;
+    aspect-ratio: auto;
   }
 }
 
