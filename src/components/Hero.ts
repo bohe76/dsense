@@ -1,14 +1,23 @@
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FluidBackground } from './FluidBackground';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export class Hero {
   private element: HTMLElement;
+  private fluidBg: FluidBackground | null = null;
 
   constructor(targetId: string) {
     const target = document.getElementById(targetId);
     if (!target) throw new Error(`Target element '${targetId}' not found`);
     this.element = target;
     this.render();
-    this.initAnimations();
+
+    // Defer initialization slightly to ensure layout
+    requestAnimationFrame(() => {
+      this.initAnimations();
+    });
   }
 
   render() {
@@ -22,6 +31,7 @@ export class Hero {
         .join('');
     };
 
+    // Removed .hero-image, FluidBackground will be appended to .hero-bg
     this.element.innerHTML = `
       <div class="hero-content">
         <h2 class="hero-title">
@@ -37,14 +47,19 @@ export class Hero {
           Experience Design Agency
         </p>
       </div>
-      <div class="hero-bg">
-         <div class="hero-image"></div>
-      </div>
+      <div class="hero-bg" style="opacity: 0;"></div> 
     `;
     this.element.className = 'hero';
   }
 
   initAnimations() {
+    // 0. Initialize Fluid Background
+    const bgContainer = this.element.querySelector('.hero-bg') as HTMLElement;
+    if (bgContainer) {
+      this.fluidBg = new FluidBackground(bgContainer);
+      this.fluidBg.animate();
+    }
+
     // High-End Cinematic Entrance
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
@@ -68,11 +83,10 @@ export class Hero {
         },
         '-=1.5'
       )
-      .from(
-        this.element.querySelector('.hero-bg'),
+      .to( // Create customized Fade-In for Fluid Canvas
+        bgContainer,
         {
-          scale: 1.15,
-          opacity: 0,
+          opacity: 1, // Fluid might be bright, maybe 0.8? Using 1 for full effect.
           duration: 2.5,
           ease: 'power2.out',
         },

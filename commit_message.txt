@@ -1,5 +1,6 @@
-fix: 프로젝트 카드 필터 애니메이션 적용 및 호버 안정화
+feat: WebGL 기반 유체 시뮬레이션 배경 및 색상 순환 인터랙션 추가
 
-- 필터링 시 초기 등장과 동일한 페이드업 애니메이션 적용 (animateDefaultReveal)
-- 호버 시 레이아웃 이동 방지를 위해 CSS transform 제거
-- 애니메이션 종료 후 위치 튀는 현상 방지를 위해 clearProps 제거
+- Stable Fluids 알고리즘을 사용한 FluidBackground 컴포넌트 구현
+- 마우스 움직임에 반응하는 유체 효과 및 시간 기반 색상(Hue Cycle) 변화 적용
+- Hero 섹션 배경을 정적 이미지에서 WebGL 캔버스로 교체하여 인터랙티브 경험 강화
+- 기존 텍스트 등장 애니메이션(GSAP) 유지 및 배경 페이드인 효과 통합
