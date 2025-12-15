@@ -1119,25 +1119,70 @@ ul {
   top: 80px;
   z-index: 90;
 
-  /* Glassmorphism Pill */
-  background: rgba(248, 248, 248, 0.3);
-  /* Even more transparent */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Glassmorphism Pill (Base State: Transparent) */
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
   border-radius: 50px;
-  /* Fully rounded pill shape */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  /* Subtle border */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  /* Subtle shadow for lift */
+  border: 1px solid transparent;
+  box-shadow: none;
+
+  border: 1px solid transparent;
+  box-shadow: none;
 
   /* Transition */
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chip-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile: Circular First-Letter Chip */
+@media (max-width: 768px) {
+  .category-filter-container {
+    padding: 0.5rem 1rem;
+    /* Slightly tighter on mobile */
+    gap: 0.4rem;
+  }
+
+  .filter-chip {
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    /* Circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chip-text {
+    display: none;
+    /* Hide full text */
+  }
+
+  .filter-chip::before {
+    content: attr(data-initial);
+    /* Show first letter */
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+}
+
+/* Sticky State (Pinned) */
+.category-filter-container.is-pinned {
+  background: rgba(248, 248, 248, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* Dark mode support if applicable */
 @media (prefers-color-scheme: dark) {
-  .category-filter-container {
+  .category-filter-container.is-pinned {
     background: rgba(20, 20, 20, 0.3);
     border-color: rgba(255, 255, 255, 0.1);
   }

@@ -51,16 +51,19 @@ export class ProjectList {
     const filterHtml = `
       <div class="category-filter-container">
         ${this.allCategories
-          .map(
-            (cat) => `
-          <div class="filter-chip" data-cat="${cat}">
-            ${cat}
+        .map(
+          (cat) => `
+          <div class="filter-chip" data-cat="${cat}" data-initial="${cat.charAt(0)}">
+            <span class="chip-text">${cat}</span>
           </div>
         `
-          )
-          .join('')}
+        )
+        .join('')}
       </div>
     `;
+
+    // Sentinel for Sticky Detection
+    const sentinelHtml = `<div class="filter-sentinel" style="position:absolute; top:-1px; height:1px; width:100%; visibility:hidden;"></div>`;
 
     this.element.innerHTML = `
       <div class="container projects">
@@ -72,30 +75,32 @@ export class ProjectList {
             <span class="project-count">/ ${this.projects.length.toString().padStart(2, '0')}</span>
         </div>
         
+        <!-- Sticky Sentinel -->
+        ${sentinelHtml}
         <!-- Category Filter -->
         ${filterHtml}
         
         <!-- 3-Column Grid -->
         <div class="project-grid-3col">
           ${this.projects
-            .map((work) => {
-              // Add a wrapper or inject data-category into the card for easy filtering
-              // Since createProjectCard returns a string, we need to ensure the root element has the category
-              // We can do this by wrapping or modifying createProjectCard.
-              // Currently createProjectCard returns a div with class "work-card group".
-              // We'll wrap it or better yet, simply rely on the fact createProjectCard adds data-id,
-              // but for filtering performance, data-category on the card is best.
-              // Let's modify the string slightly to include data-category if ProjectCard doesn't already (it uses data-cat inside for the chip).
-              // Actually, ProjectCard.ts adds data-id. We will inject data-category into the card string here using replace.
+        .map((work) => {
+          // Add a wrapper or inject data-category into the card for easy filtering
+          // Since createProjectCard returns a string, we need to ensure the root element has the category
+          // We can do this by wrapping or modifying createProjectCard.
+          // Currently createProjectCard returns a div with class "work-card group".
+          // We'll wrap it or better yet, simply rely on the fact createProjectCard adds data-id,
+          // but for filtering performance, data-category on the card is best.
+          // Let's modify the string slightly to include data-category if ProjectCard doesn't already (it uses data-cat inside for the chip).
+          // Actually, ProjectCard.ts adds data-id. We will inject data-category into the card string here using replace.
 
-              const cardHtml = createProjectCard(work, work.thumbnail);
-              // Inject data-category attribute into the opening tag of the card
-              return cardHtml.replace(
-                'class="work-card group"',
-                `class="work-card group" data-category="${work.category}"`
-              );
-            })
-            .join('')}
+          const cardHtml = createProjectCard(work, work.thumbnail);
+          // Inject data-category attribute into the opening tag of the card
+          return cardHtml.replace(
+            'class="work-card group"',
+            `class="work-card group" data-category="${work.category}"`
+          );
+        })
+        .join('')}
         </div>
         
         <!-- Floating Mobile Counter -->
@@ -154,6 +159,29 @@ export class ProjectList {
         chip.classList.remove('is-hovered');
       });
     });
+
+    // 3. Sticky Observer (Dynamic Background)
+    const sentinel = this.element.querySelector('.filter-sentinel');
+    const stickyFilterContainer = this.element.querySelector('.category-filter-container'); // Re-select to be sure
+
+    if (sentinel && stickyFilterContainer) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          // If sentinel is not intersecting and we scrolled past it (top < 0), add class
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            stickyFilterContainer.classList.add('is-pinned');
+          } else {
+            stickyFilterContainer.classList.remove('is-pinned');
+          }
+        },
+        {
+          root: null,
+          threshold: 0,
+          rootMargin: '-81px 0px 0px 0px' // Trigger when it hits the sticky offset
+        }
+      );
+      observer.observe(sentinel);
+    }
   }
 
   toggleCategory(category: string, chipElement: HTMLElement) {

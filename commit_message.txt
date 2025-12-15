@@ -1,5 +1,8 @@
-style: 프로젝트 필터 UI 스크롤 고정(Sticky) 및 Glassmorphism 디자인 적용
+feat(ui): 필터 UI 개선 - Sticky바 동적 배경 및 모바일 이니셜 칩 최적화
 
-- .category-filter-container에 position: sticky를 적용하여 스크롤 시에도 상단에 고정되도록 개선
-- Header 높이를 고려하여 top: 80px로 오프셋 설정, 헤더 겹침 방지
-- 중앙 정렬(Dynamic Island 스타일), 반투명 블러 배경(opacity 0.3, backdrop-filter) 적용으로 UX 및 심미성 강화
+- ProjectList.ts: 
+  - Sticky 감지를 위한 Sentinel 요소 및 IntersectionObserver 로직 추가 (.is-pinned 토글)
+  - 모바일용 이니셜 표시를 위한 `data-initial` 속성 추가
+- style.css:
+  - 필터 컨테이너 Sticky 적용 및 Pinned 상태일 때만 Glassmorphism 배경 적용
+  - 모바일(<768px)에서 필터 칩을 원형(Circle) 및 첫 글자만 표시하도록 스타일 최적화
