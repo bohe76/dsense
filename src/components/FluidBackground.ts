@@ -301,6 +301,15 @@ export class FluidBackground {
         window.addEventListener('resize', this.onResize.bind(this));
         window.addEventListener('mousemove', this.onMouseMove.bind(this));
 
+        // Mobile Touch Events
+        window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: false });
+        window.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: true });
+
+        // Device Orientation (Gyroscope)
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', this.onDeviceOrientation.bind(this));
+        }
+
         // Initial Splats for visual
         for (let i = 0; i < 5; i++) {
             this.splatStack.push({
@@ -345,6 +354,79 @@ export class FluidBackground {
         });
 
         this.lastMouse.set(x, y);
+    }
+
+    // Touch move handler - similar to mouse move
+    private lastTouch = new THREE.Vector2();
+    onTouchMove(e: TouchEvent) {
+        e.preventDefault(); // Prevent scrolling while interacting with fluid
+        const touch = e.touches[0];
+        const x = touch.clientX / window.innerWidth;
+        const y = 1.0 - touch.clientY / window.innerHeight;
+
+        const dx = (x - this.lastTouch.x) * window.innerWidth;
+        const dy = (y - this.lastTouch.y) * window.innerHeight;
+
+        const time = Date.now() * 0.001;
+        const color = new THREE.Color().setHSL((time % 10) / 10, 0.8, 0.6);
+
+        this.splatStack.push({
+            x,
+            y,
+            dx: dx * 3.0,
+            dy: dy * 3.0,
+            color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(3.0),
+        });
+
+        this.lastTouch.set(x, y);
+    }
+
+    // Touch start handler - initialize touch position
+    onTouchStart(e: TouchEvent) {
+        const touch = e.touches[0];
+        const x = touch.clientX / window.innerWidth;
+        const y = 1.0 - touch.clientY / window.innerHeight;
+        this.lastTouch.set(x, y);
+
+        // Initial splat on touch
+        const time = Date.now() * 0.001;
+        const color = new THREE.Color().setHSL((time % 10) / 10, 0.8, 0.6);
+        this.splatStack.push({
+            x,
+            y,
+            dx: (Math.random() - 0.5) * 100,
+            dy: (Math.random() - 0.5) * 100,
+            color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(2.0),
+        });
+    }
+
+    // Device orientation handler - tilt phone to move fluid
+    private lastOrientation = { beta: 0, gamma: 0 };
+    onDeviceOrientation(e: DeviceOrientationEvent) {
+        if (e.beta === null || e.gamma === null) return;
+
+        // Smooth the values
+        const beta = e.beta; // Front-back tilt (-180 to 180)
+        const gamma = e.gamma; // Left-right tilt (-90 to 90)
+
+        const dx = (gamma - this.lastOrientation.gamma) * 2;
+        const dy = (beta - this.lastOrientation.beta) * 2;
+
+        // Only create splat if there's significant movement
+        if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+            const time = Date.now() * 0.001;
+            const color = new THREE.Color().setHSL((time % 10) / 10, 0.7, 0.5);
+
+            this.splatStack.push({
+                x: 0.5 + gamma / 180, // Center-ish based on tilt
+                y: 0.5 + beta / 360,
+                dx: dx * 10,
+                dy: -dy * 10,
+                color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(2.0),
+            });
+        }
+
+        this.lastOrientation = { beta, gamma };
     }
 
     step(_dt: number) {
