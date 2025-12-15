@@ -24,13 +24,13 @@ d:/dsense/
 ├── index.html              # 애플리케이션의 단일 진입점
 ├── package.json            # 프로젝트 의존성 및 스크립트 정의
 ├── package-lock.json       # 정확한 의존성 버전 관리 (npm)
+├── _assets_backup/         # [NEW] 배포에서 제외되는 미사용 에셋 백업 (예: 구 버전 hero-bg.png) 
 ├── tsconfig.json           # TypeScript 컴파일러 설정
 ├── vite.config.ts          # Vite 빌드 및 개발 서버 설정
 ├── .prettierrc.json        # Prettier 코드 포맷터 설정
 ├── eslint.config.js        # ESLint (v9 Flat Config) 설정
 ├── public/                 # 웹 서버를 통해 직접 접근 가능한 정적 리소스
 │   ├── favicon.png         # 파비콘
-│   ├── hero-bg.png         # 히어로 섹션 배경 이미지
 │   ├── images/             # 프로젝트 썸네일 이미지 및 Open Graph 이미지 (og-image.jpg)
 │   ├── videos/             # (로컬 개발용) 원본 비디오 파일 (Git 추적 제외)
 │   ├── robots.txt          # 검색 엔진 크롤링 지침
@@ -41,7 +41,8 @@ d:/dsense/
     ├── types.ts            # 공통 데이터 타입 정의 (인터페이스)
     ├── components/         # UI 컴포넌트 (클래스 기반)
     │   ├── Header.ts       # 헤더 내비게이션 및 애니메이션
-    │   ├── Hero.ts         # 메인 히어로 섹션 및 애니메이션
+    │   ├── Hero.ts         # 메인 히어로 섹션 및 텍스트/WebGL 애니메이션 조정
+    │   ├── FluidBackground.ts # [NEW] WebGL 유체 시뮬레이션 배경 컴포넌트 (Stable Fluids)
     │   ├── About.ts        # 회사 소개 섹션 및 텍스트 애니메이션
     │   ├── Thinking.ts     # 비전/철학 섹션 및 텍스트 애니메이션
     │   ├── ProjectList.ts  # 포트폴리오 목록 렌더링 및 필터링, 카운터 관리
@@ -213,3 +214,5 @@ Windows PowerShell 환경에서 `npm` 스크립트(예: `npm run dev`, `npm inst
 - **검색 엔진 연동**: `index.html`에 Google Analytics 스크립트 및 Naver Site Verification 메타 태그 추가. `public` 디렉토리에 `sitemap.xml` 및 `robots.txt` 파일 추가.
 - **모바일 필터 호버 문제 해결**: `src/style.css` 및 `src/components/ProjectList.ts` 수정으로 모바일 터치 환경에서 필터 칩의 호버 효과가 고정되는 문제 해결.
 - **동적 카운터 불일치 문제 해결**: 필터링 후 프로젝트 개수 카운터 및 섹션 헤더의 총 개수가 올바르게 표시되지 않던 문제 해결.
+- **Hero 섹션 고도화**: 정적 이미지 배경을 WebGL 기반 유체 시뮬레이션(`FluidBackground.ts`)으로 교체하여 인터랙티브한 사용자 경험 제공. (Three.js 활용)
+- **자산 관리 개선**: 미사용 에셋을 `_assets_backup` 루트 디렉토리로 이동하여 배포 패키지 용량 최적화.

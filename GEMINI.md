@@ -129,3 +129,13 @@ Start-Process python -ArgumentList "-m", "http.server", "8080" -NoNewWindow
 *   `fill`: UID를 사용하여 입력 필드에 값을 채웁니다.
 *   `evaluate_script`: 페이지 내에서 JavaScript 코드를 실행합니다.
 *   `list_console_messages`: 브라우저 콘솔에 출력된 로그를 가져옵니다. 디버깅 로그(`console.log`) 확인 시 유용합니다.
+
+### DSENSE 프로젝트 특이사항 (Preferences)
+
+#### 디자인 및 인터랙션 취향
+- **고급스러운 유체 효과 선호:** Hero 섹션 등 주요 비주얼에 WebGL 기반의 유체 시뮬레이션(Fluid/Smoke) 또는 파티클 효과를 선호함.
+- **섬세한 표현:** 굵고 투박한 잉크보다는 **가늘고 섬세한 붓 터치** 느낌의 인터랙션을 지향함. (예: 시뮬레이션 해상도 High, Radius Low)
+- **Time-based HSL 순환:** 단색보다는 시간 흐름에 따라 색상이 은은하게 변하는(Hue Cycle) 효과를 좋아함.
+
+#### 자산 관리 및 백업 전략
+- **배포 제외 백업:** 프로젝트에서 더 이상 사용하지 않지만 보관이 필요한 에셋(예: 교체된 이미지)은 `public` 폴더가 아닌 프로젝트 루트의 **`_assets_backup`** 폴더로 이동시켜 배포 패키지 용량을 최적화한다.

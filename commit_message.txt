@@ -1,4 +1,4 @@
-chore: Hero 섹션 리팩토링 후 미사용 자산(hero-bg.png) 백업 및 Dead CSS 제거
+docs: Hero 섹션 아키텍처 변경 및 프로젝트 선호도(GEMINI.md) 업데이트
 
-- public/hero-bg.png를 _assets_backup 폴더로 이동하여 배포 패키지에서 제외 및 원본 보존
-- src/style.css에서 더 이상 사용되지 않는 .hero-image 스타일 클래스 삭제
+- GEMINI.md: WebGL 유체 시뮬레이션 선호, 백업 전략 등 프로젝트 특이사항 추가
+- docs/ARCHITECTURE.md: Hero 섹션 리팩토링(FluidBackground), 백업 디렉토리 구조 반영 및 최신 업데이트 요약 추가
