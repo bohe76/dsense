@@ -1,4 +1,5 @@
-docs: Hero 섹션 아키텍처 변경 및 프로젝트 선호도(GEMINI.md) 업데이트
+style: 프로젝트 필터 UI 스크롤 고정(Sticky) 및 Glassmorphism 디자인 적용
 
-- GEMINI.md: WebGL 유체 시뮬레이션 선호, 백업 전략 등 프로젝트 특이사항 추가
-- docs/ARCHITECTURE.md: Hero 섹션 리팩토링(FluidBackground), 백업 디렉토리 구조 반영 및 최신 업데이트 요약 추가
+- .category-filter-container에 position: sticky를 적용하여 스크롤 시에도 상단에 고정되도록 개선
+- Header 높이를 고려하여 top: 80px로 오프셋 설정, 헤더 겹침 방지
+- 중앙 정렬(Dynamic Island 스타일), 반투명 블러 배경(opacity 0.3, backdrop-filter) 적용으로 UX 및 심미성 강화

@@ -1100,13 +1100,47 @@ ul {
 /* --- Category Filter Styles --- */
 .category-filter-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  /* Horizontally center chips */
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin-bottom: 3rem;
-  padding: 0 1rem;
-  max-width: 1200px;
-  /* Optional: limit width */
+  margin: 0 auto 3rem auto;
+  /* Horizontally center container */
+  padding: 0.8rem 1.5rem;
+  /* Padding inside the pill */
+
+  width: fit-content;
+  /* Fit width to content */
+  max-width: 90%;
+  /* Prevent it from touching edges on small screens */
+
+  /* Sticky Positioning */
+  position: sticky;
+  top: 80px;
+  z-index: 90;
+
+  /* Glassmorphism Pill */
+  background: rgba(248, 248, 248, 0.3);
+  /* Even more transparent */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 50px;
+  /* Fully rounded pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Subtle border */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  /* Subtle shadow for lift */
+
+  /* Transition */
+  transition: all 0.3s ease;
+}
+
+/* Dark mode support if applicable */
+@media (prefers-color-scheme: dark) {
+  .category-filter-container {
+    background: rgba(20, 20, 20, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .filter-chip {
