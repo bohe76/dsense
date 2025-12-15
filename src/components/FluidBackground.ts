@@ -372,8 +372,8 @@ export class FluidBackground {
             this.splatStack.push({
                 x: 0.5 + gamma / 180, // Center-ish based on tilt
                 y: 0.5 + beta / 360,
-                dx: dx * 10, // Original intensity
-                dy: -dy * 10,
+                dx: dx * 20, // Longer strokes
+                dy: -dy * 20,
                 color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(2.0),
             });
         }
