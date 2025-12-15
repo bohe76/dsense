@@ -21,12 +21,13 @@ const lenis = new Lenis({
 });
 (window as any).lenis = lenis;
 
-const appElement = document.getElementById('app');
+// Header is now created outside of #app so we don't need appElement here anymore
+// const appElement = document.getElementById('app'); 
 const blurFilter = document.querySelector('#vertical-blur feGaussianBlur');
 // Select the project grid container dynamically (after it's rendered) or check inside the loop
 // Since components are rendered later, we might need to select it inside 'scroll' or wait.
 // But 'scroll' events are frequent, so let's try to cache it if possible, or select efficiently.
-// Given the structure, ProjectList renders into #projects-container. 
+// Given the structure, ProjectList renders into #projects-container.
 // We will select it inside the scroll handler for safety, as it might be re-rendered.
 // Actually, to avoid querySelector every frame, let's look it up once if null.
 

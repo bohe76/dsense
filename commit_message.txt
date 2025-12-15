@@ -1,4 +1,6 @@
-feat(mobile): 자이로 움직임 거리 2배 증가
+chore: apply lint fixes, finalize docs, and clean up code
 
-- 기울기 감지 시 유체 움직임 거리 증가 (10→20)
-- 민감도(0.1)와 색상 강도(2.0)는 유지
+- fix: remove unused appElement from main.ts to fix build error
+- style: apply lint fixes to FluidBackground.ts
+- docs: move project preferences from GEMINI.md to ARCHITECTURE.md
+- chore: remove temporary commit message file
