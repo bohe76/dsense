@@ -83,7 +83,8 @@ export class Hero {
         },
         '-=1.5'
       )
-      .to( // Create customized Fade-In for Fluid Canvas
+      .to(
+        // Create customized Fade-In for Fluid Canvas
         bgContainer,
         {
           opacity: 1, // Fluid might be bright, maybe 0.8? Using 1 for full effect.
