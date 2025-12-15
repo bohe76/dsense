@@ -1358,17 +1358,19 @@ ul {
 
 /* Standard Deep Purple for Metaverse if not defined */
 
-.filter-chip:hover {
-  /* transform: translateY(-2px); Removed to prevent mobile hover stickiness */
-  filter: brightness(1.1);
+/* PC Only: Hover Effect (Translation + Brightness) */
+@media (hover: hover) and (min-width: 768px) {
+  .filter-chip:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.1);
+  }
 }
 
-/* Apply Translation Only on PC (Hover capable) */
-@media (hover: hover) {
-
-  .filter-chip:hover,
-  .filter-chip.is-hovered {
-    transform: translateY(-4px);
+/* Mobile Safety: Force disable hover transform/filter to prevent stickiness */
+@media (max-width: 768px) {
+  .filter-chip:hover {
+    transform: none !important;
+    filter: none !important;
   }
 }
 
