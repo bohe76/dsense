@@ -42,7 +42,7 @@ d:/dsense/
     ├── components/         # UI 컴포넌트 (클래스 기반)
     │   ├── Header.ts       # 헤더 내비게이션 및 애니메이션
     │   ├── Hero.ts         # 메인 히어로 섹션 및 텍스트/WebGL 애니메이션 조정
-    │   ├── FluidBackground.ts # [NEW] WebGL 유체 시뮬레이션 배경 컴포넌트 (Stable Fluids)
+    │   ├── FluidBackground.ts # [NEW] WebGL 유체 시뮬레이션 배경 컴포넌트. 데스크톱(마우스) 및 모바일(자이로스코프) 인터랙션 지원.
     │   ├── About.ts        # 회사 소개 섹션 및 텍스트 애니메이션
     │   ├── Thinking.ts     # 비전/철학 섹션 및 텍스트 애니메이션
     │   ├── ProjectList.ts  # 포트폴리오 목록 렌더링 및 필터링, 카운터 관리
@@ -219,5 +219,6 @@ Windows PowerShell 환경에서 `npm` 스크립트(예: `npm run dev`, `npm inst
 - **자산 관리 개선**: 미사용 에셋을 `_assets_backup` 루트 디렉토리로 이동하여 배포 패키지 용량 최적화.
 - **필터 로직 개선**: "Select Mode + ALL" 방식으로 전환. 마지막 클릭 카테고리 우선 표시 (배열 기반 정렬).
 - **스크롤 모션 블러**: 필터 오토 스크롤 시 SVG feGaussianBlur 기반 세로 모션 블러 적용.
-- **유체 효과 반응형**: 모바일에서 붓 크기(splat radius) 축소 (0.0011 vs 0.0025).
+- **유체 효과 반응형**: 모바일에서 붓 크기(splat radius) 축소 및 터치 이벤트 제거. **자이로스코프** 전용 인터랙션 구현 (움직임 거리 2배 등 튜닝).
 - **줄바꿈 통일**: `.gitattributes` 추가로 LF 강제, CRLF 린트 에러 해결.
+- **모바일 UI/UX 개선**: 스크롤바 완전 숨김 (`scrollbar-width: none`), `html`/`body`에 `width: 100%` 및 `overflow-x: hidden` 강제 적용으로 모바일 크롬 우측 여백 문제 해결.
