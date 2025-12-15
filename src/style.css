@@ -63,6 +63,14 @@ body {
   /* Tighter tracking like Card UI */
 }
 
+#app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  filter: url('#vertical-blur');
+  /* Dynamic Motion Blur */
+}
+
 .mix-difference {
   mix-blend-mode: difference;
   color: #fff;

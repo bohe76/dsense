@@ -1,7 +1,6 @@
-fix(ui): 필터 오토 스크롤 애니메이션 이징 수정(Cubic) 및 동작 오류 해결
+feat(ui): 스크롤 모션 블러(Motion Blur) 구현 및 필터 이동 시에만 적용
 
-- ProjectList.ts:
-  - 오토 스크롤 애니메이션 이징을 Power4에서 Cubic(Math.pow(3))으로 변경하여 더 자연스러운 감속 효과 적용 (duration: 0.6s)
-  - 필터 재선택(ON) 시 스크롤이 트리거되지 않는 버그 수정:
-    - DOM 레이아웃 변경 대기를 위해 requestAnimationFrame 적용
-    - 현재 스크롤 위치가 타겟보다 아래에 있을 때만 스크롤하도록 조건 추가 (window.scrollY > targetScrollY + 10)
+- index.html: SVG feGaussianBlur 필터 추가 (Vertical Blur)
+- style.css: #app 컨테이너에 SVG 필터 적용 (filter: url('#vertical-blur'))
+- main.ts: Lenis 스크롤 속도(velocity)에 따라 실시간으로 블러 강도(stdDeviation) 조절하는 로직 추가
+- ProjectList.ts: 오토 스크롤 시에만 isFilterScrolling 플래그를 활성화하여 모션 블러가 적용되도록 제어 (평소 스크롤에는 적용 안 함)

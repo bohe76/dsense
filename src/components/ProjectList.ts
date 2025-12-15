@@ -197,11 +197,16 @@ export class ProjectList {
         // Only scroll if we are BELOW the target position (plus disjoint margin)
         if (window.scrollY > targetScrollY + 10) {
           if (lenis) {
+            (window as any).isFilterScrolling = true; // Enable motion blur
             lenis.scrollTo(targetScrollY, {
               duration: 0.6,
               easing: (t: number) => 1 - Math.pow(1 - t, 3), // Cubic.out
               immediate: false
             });
+            // Disable motion blur after animation duration
+            setTimeout(() => {
+              (window as any).isFilterScrolling = false;
+            }, 600);
           } else {
             window.scrollTo({ top: targetScrollY, behavior: 'auto' });
           }

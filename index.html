@@ -6,8 +6,10 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DSENSE - Digital Experience Agency</title>
-  <meta name="description" content="DSENSE(디센스)는 디지털 경험을 혁신하는 크리에이티브 에이전시로, UI/UX, 웹, 모바일, 영상, 일러스트 등 다양한 분야에서 최고의 전문가들이 함께하며, SEO 최적화 및 온라인 마케팅 전략을 제공합니다." />
-  <meta name="keywords" content="DSENSE, 디센스, 디지털 에이전시, 크리에이티브, UI/UX, 웹 개발, 모바일 앱, 영상 제작, 일러스트레이션, 브랜딩, SEO 최적화, 온라인 마케팅 전략" />
+  <meta name="description"
+    content="DSENSE(디센스)는 디지털 경험을 혁신하는 크리에이티브 에이전시로, UI/UX, 웹, 모바일, 영상, 일러스트 등 다양한 분야에서 최고의 전문가들이 함께하며, SEO 최적화 및 온라인 마케팅 전략을 제공합니다." />
+  <meta name="keywords"
+    content="DSENSE, 디센스, 디지털 에이전시, 크리에이티브, UI/UX, 웹 개발, 모바일 앱, 영상 제작, 일러스트레이션, 브랜딩, SEO 최적화, 온라인 마케팅 전략" />
   <meta property="og:title" content="DSENSE - Digital Experience Agency" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dsense.co.kr/" />
@@ -22,7 +24,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJHBS83EY0"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-RJHBS83EY0');
@@ -42,6 +44,16 @@
     <footer id="footer"></footer>
   </div>
   <script type="module" src="/src/main.ts"></script>
+
+  <!-- Vertical Motion Blur Filter -->
+  <svg style="position: absolute; width: 0; height: 0; display: block; overflow: hidden; pointer-events: none;">
+    <defs>
+      <filter id="vertical-blur" filterUnits="userSpaceOnUse" x="-50%" y="-50%" width="200%" height="200%">
+        <!-- stdDeviation="x y" - Only blur Y axis -->
+        <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
+      </filter>
+    </defs>
+  </svg>
 </body>
 
 </html>

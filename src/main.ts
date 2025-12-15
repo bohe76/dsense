@@ -21,6 +21,22 @@ const lenis = new Lenis({
 });
 (window as any).lenis = lenis;
 
+const blurFilter = document.querySelector('#vertical-blur feGaussianBlur');
+lenis.on('scroll', (e: any) => {
+  if (blurFilter) {
+    // Only apply blur if Filter Auto-Scroll is active
+    if (!(window as any).isFilterScrolling) {
+      blurFilter.setAttribute('stdDeviation', '0 0');
+      return;
+    }
+
+    // Blur intensity based on velocity
+    const velocity = Math.abs(e.velocity);
+    const blurAmount = Math.min(velocity * 0.15, 10); // Clamp max blur
+    blurFilter.setAttribute('stdDeviation', `0 ${blurAmount}`);
+  }
+});
+
 function raf(time: number) {
   lenis.raf(time);
   requestAnimationFrame(raf);
