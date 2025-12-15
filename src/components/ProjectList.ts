@@ -182,25 +182,31 @@ export class ProjectList {
     const sentinel = this.element.querySelector('.filter-sentinel') as HTMLElement;
 
     if (filterContainer && sentinel) {
-      const isMobile = window.innerWidth <= 768;
-      // Adjust these offsets to fine-tune the scroll position
-      const offsetPC = -460;    // Header(80) + Padding(20)
-      const offsetMobile = -296; // Mobile Header(approx) + Padding
-      const targetOffset = isMobile ? offsetMobile : offsetPC;
+      // Use requestAnimationFrame to let DOM update first (cards appearing/disappearing changes height)
+      requestAnimationFrame(() => {
+        const isMobile = window.innerWidth <= 768;
+        const offsetPC = -460;
+        const offsetMobile = -296;
+        const targetOffset = isMobile ? offsetMobile : offsetPC;
 
-      const lenis = (window as any).lenis;
+        const lenis = (window as any).lenis;
+        // Recalculate positions after DOM update
+        const absoluteSentinelTop = window.scrollY + sentinel.getBoundingClientRect().top;
+        const targetScrollY = absoluteSentinelTop - targetOffset;
 
-      // Calculate Absolute Position of SENTINEL (which stays put) not filter (which floats)
-      const absoluteSentinelTop = window.scrollY + sentinel.getBoundingClientRect().top;
-      const targetScrollY = absoluteSentinelTop - targetOffset;
-
-      if (lenis) {
-        // Use immediate scroll to absolute coordinate
-        lenis.scrollTo(targetScrollY, { immediate: true });
-      } else {
-        // Fallback
-        window.scrollTo({ top: targetScrollY, behavior: 'auto' });
-      }
+        // Only scroll if we are BELOW the target position (plus disjoint margin)
+        if (window.scrollY > targetScrollY + 10) {
+          if (lenis) {
+            lenis.scrollTo(targetScrollY, {
+              duration: 0.6,
+              easing: (t: number) => 1 - Math.pow(1 - t, 3), // Cubic.out
+              immediate: false
+            });
+          } else {
+            window.scrollTo({ top: targetScrollY, behavior: 'auto' });
+          }
+        }
+      });
     }
   }
 
