@@ -718,6 +718,12 @@ ul {
   color: var(--text-muted);
 }
 
+
+
+.projects {
+  position: relative;
+}
+
 /* New Project Grid - 3 Columns */
 .project-grid-3col {
   display: grid;
@@ -1119,16 +1125,13 @@ ul {
   top: 80px;
   z-index: 90;
 
-  /* Glassmorphism Pill (Base State: Transparent) */
-  background: transparent;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
+  /* Glassmorphism Pill (Permanent) */
+  background: rgba(248, 248, 248, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 50px;
-  border: 1px solid transparent;
-  box-shadow: none;
-
-  border: 1px solid transparent;
-  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 
   /* Transition */
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1171,18 +1174,9 @@ ul {
   }
 }
 
-/* Sticky State (Pinned) */
-.category-filter-container.is-pinned {
-  background: rgba(248, 248, 248, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* Dark mode support if applicable */
+/* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  .category-filter-container.is-pinned {
+  .category-filter-container {
     background: rgba(20, 20, 20, 0.3);
     border-color: rgba(255, 255, 255, 0.1);
   }

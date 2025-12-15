@@ -1,8 +1,10 @@
-feat(ui): 필터 UI 개선 - Sticky바 동적 배경 및 모바일 이니셜 칩 최적화
+feat(ui): 필터 오토 스크롤 정확도 개선 및 배경 스타일 고정
 
-- ProjectList.ts: 
-  - Sticky 감지를 위한 Sentinel 요소 및 IntersectionObserver 로직 추가 (.is-pinned 토글)
-  - 모바일용 이니셜 표시를 위한 `data-initial` 속성 추가
+- ProjectList.ts:
+  - 오토 스크롤 로직 변경: 움직이는 필터 대신 고정된 Sentinel 기준으로 절대 좌표 계산
+  - PC/Mobile 반응형 오프셋 적용 및 사용자 미세 조정 (-460, -296)
+  - 필터 배경 토글 로직(Observer) 제거 (항상 보이도록 변경)
 - style.css:
-  - 필터 컨테이너 Sticky 적용 및 Pinned 상태일 때만 Glassmorphism 배경 적용
-  - 모바일(<768px)에서 필터 칩을 원형(Circle) 및 첫 글자만 표시하도록 스타일 최적화
+  - .projects 컨테이너에 position: relative 추가하여 Sentinel 좌표 기준점 확립
+  - 필터 컨테이너(.category-filter-container)의 Glassmorphism 배경 스타일을 영구 적용으로 변경 (is-pinned 의존성 제거)
+  - 중복된 CSS 코드 및 문법 오류 수정

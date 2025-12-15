@@ -160,28 +160,6 @@ export class ProjectList {
       });
     });
 
-    // 3. Sticky Observer (Dynamic Background)
-    const sentinel = this.element.querySelector('.filter-sentinel');
-    const stickyFilterContainer = this.element.querySelector('.category-filter-container'); // Re-select to be sure
-
-    if (sentinel && stickyFilterContainer) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          // If sentinel is not intersecting and we scrolled past it (top < 0), add class
-          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-            stickyFilterContainer.classList.add('is-pinned');
-          } else {
-            stickyFilterContainer.classList.remove('is-pinned');
-          }
-        },
-        {
-          root: null,
-          threshold: 0,
-          rootMargin: '-81px 0px 0px 0px' // Trigger when it hits the sticky offset
-        }
-      );
-      observer.observe(sentinel);
-    }
   }
 
   toggleCategory(category: string, chipElement: HTMLElement) {
@@ -198,6 +176,32 @@ export class ProjectList {
     }
 
     this.filterProjects();
+
+    // Auto-Scroll to Filter Top if we are below it
+    const filterContainer = this.element.querySelector('.category-filter-container') as HTMLElement;
+    const sentinel = this.element.querySelector('.filter-sentinel') as HTMLElement;
+
+    if (filterContainer && sentinel) {
+      const isMobile = window.innerWidth <= 768;
+      // Adjust these offsets to fine-tune the scroll position
+      const offsetPC = -460;    // Header(80) + Padding(20)
+      const offsetMobile = -296; // Mobile Header(approx) + Padding
+      const targetOffset = isMobile ? offsetMobile : offsetPC;
+
+      const lenis = (window as any).lenis;
+
+      // Calculate Absolute Position of SENTINEL (which stays put) not filter (which floats)
+      const absoluteSentinelTop = window.scrollY + sentinel.getBoundingClientRect().top;
+      const targetScrollY = absoluteSentinelTop - targetOffset;
+
+      if (lenis) {
+        // Use immediate scroll to absolute coordinate
+        lenis.scrollTo(targetScrollY, { immediate: true });
+      } else {
+        // Fallback
+        window.scrollTo({ top: targetScrollY, behavior: 'auto' });
+      }
+    }
   }
 
   private updateSectionProjectCount() {
@@ -267,7 +271,6 @@ export class ProjectList {
   }
 
   initAnimations() {
-    const cards = this.element.querySelectorAll('.work-card');
     const counter = this.element.querySelector('.project-floating-counter');
     const titleChars = this.element.querySelectorAll(
       '.section-title .text-reveal'
