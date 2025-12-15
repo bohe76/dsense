@@ -162,7 +162,8 @@ d:/dsense/
 
 ### 7.1. `ProjectList` 컴포넌트 (`src/components/ProjectList.ts`)
 - `works.json` 데이터를 기반으로 포트폴리오 카드(`ProjectCard`) 목록을 렌더링합니다.
-- **카테고리 필터링**: `activeCategories` `Set`을 사용하여 활성 필터를 관리하고, `filterProjects()` 메서드를 통해 `work-card` 요소의 `display` 스타일을 토글하여 필터링된 결과만 보여줍니다.
+- **카테고리 필터링**: `activeCategories` **배열**을 사용하여 활성 필터를 **순서대로** 관리. 마지막에 클릭한 카테고리가 먼저 표시됨 (우선순위 정렬).
+- **ALL 칩:** 기본 활성화 상태. 개별 카테고리 클릭 시 ALL 비활성화, 모든 선택 해제 시 자동 ALL 활성화.
 - **섹션 헤더 카운터 (`.project-count`)**: `updateSectionProjectCount()` 메서드를 통해 현재 보이는 프로젝트 카드 개수를 정확하게 계산하고 섹션 헤더에 반영합니다.
 - **플로팅 모바일 카운터 (`.project-floating-counter`)**:
   - `initAnimations()` 및 `filterProjects()` 호출 시 `setupFloatingCounterScrollTriggers()` 메서드를 통해 동적으로 `ScrollTrigger` 인스턴스들을 관리합니다.
@@ -216,3 +217,7 @@ Windows PowerShell 환경에서 `npm` 스크립트(예: `npm run dev`, `npm inst
 - **동적 카운터 불일치 문제 해결**: 필터링 후 프로젝트 개수 카운터 및 섹션 헤더의 총 개수가 올바르게 표시되지 않던 문제 해결.
 - **Hero 섹션 고도화**: 정적 이미지 배경을 WebGL 기반 유체 시뮬레이션(`FluidBackground.ts`)으로 교체하여 인터랙티브한 사용자 경험 제공. (Three.js 활용)
 - **자산 관리 개선**: 미사용 에셋을 `_assets_backup` 루트 디렉토리로 이동하여 배포 패키지 용량 최적화.
+- **필터 로직 개선**: "Select Mode + ALL" 방식으로 전환. 마지막 클릭 카테고리 우선 표시 (배열 기반 정렬).
+- **스크롤 모션 블러**: 필터 오토 스크롤 시 SVG feGaussianBlur 기반 세로 모션 블러 적용.
+- **유체 효과 반응형**: 모바일에서 붓 크기(splat radius) 축소 (0.0011 vs 0.0025).
+- **줄바꿈 통일**: `.gitattributes` 추가로 LF 강제, CRLF 린트 에러 해결.

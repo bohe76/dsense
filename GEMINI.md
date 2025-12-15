@@ -139,3 +139,8 @@ Start-Process python -ArgumentList "-m", "http.server", "8080" -NoNewWindow
 
 #### 자산 관리 및 백업 전략
 - **배포 제외 백업:** 프로젝트에서 더 이상 사용하지 않지만 보관이 필요한 에셋(예: 교체된 이미지)은 `public` 폴더가 아닌 프로젝트 루트의 **`_assets_backup`** 폴더로 이동시켜 배포 패키지 용량을 최적화한다.
+
+#### 필터 UI/UX 구현 방식
+- **Select Mode + ALL 칩:** 필터는 "차감" 방식이 아닌 "선택" 방식. 기본 ALL 활성화, 특정 카테고리 클릭 시 ALL 비활성화.
+- **우선순위 정렬:** 마지막에 클릭한 카테고리가 먼저 표시됨 (배열 사용, `unshift`).
+- **스크롤 모션 블러:** 필터 오토 스크롤 시에만 SVG feGaussianBlur 블러 효과 적용 (Lenis velocity 연동).
