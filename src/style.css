@@ -60,25 +60,15 @@ body {
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.02em;
   /* Tighter tracking like Card UI */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
-/* Transparent Scrollbar - Section backgrounds show through */
+/* Hide Scrollbar - Clean UI across all backgrounds */
 ::-webkit-scrollbar {
-  width: 8px;
-  background: transparent;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(128, 128, 128, 0.4);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(128, 128, 128, 0.6);
+  display: none;
 }
 
 #app {

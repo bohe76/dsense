@@ -301,11 +301,7 @@ export class FluidBackground {
         window.addEventListener('resize', this.onResize.bind(this));
         window.addEventListener('mousemove', this.onMouseMove.bind(this));
 
-        // Mobile Touch Events
-        window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: false });
-        window.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: true });
-
-        // Device Orientation (Gyroscope)
+        // Device Orientation (Gyroscope) - Mobile only
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', this.onDeviceOrientation.bind(this));
         }
@@ -356,60 +352,7 @@ export class FluidBackground {
         this.lastMouse.set(x, y);
     }
 
-    // Touch move handler - similar to mouse move (Hero section only)
-    private lastTouch = new THREE.Vector2();
-    onTouchMove(e: TouchEvent) {
-        const touch = e.touches[0];
-        const heroSection = document.getElementById('hero');
-
-        // Only apply fluid effect in Hero section
-        if (!heroSection?.contains(touch.target as Node)) return;
-
-        const x = touch.clientX / window.innerWidth;
-        const y = 1.0 - touch.clientY / window.innerHeight;
-
-        const dx = (x - this.lastTouch.x) * window.innerWidth;
-        const dy = (y - this.lastTouch.y) * window.innerHeight;
-
-        const time = Date.now() * 0.001;
-        const color = new THREE.Color().setHSL((time % 10) / 10, 0.8, 0.6);
-
-        this.splatStack.push({
-            x,
-            y,
-            dx: dx * 3.0,
-            dy: dy * 3.0,
-            color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(3.0),
-        });
-
-        this.lastTouch.set(x, y);
-    }
-
-    // Touch start handler - initialize touch position (Hero section only)
-    onTouchStart(e: TouchEvent) {
-        const touch = e.touches[0];
-        const heroSection = document.getElementById('hero');
-
-        // Only apply fluid effect in Hero section
-        if (!heroSection?.contains(touch.target as Node)) return;
-
-        const x = touch.clientX / window.innerWidth;
-        const y = 1.0 - touch.clientY / window.innerHeight;
-        this.lastTouch.set(x, y);
-
-        // Initial splat on touch
-        const time = Date.now() * 0.001;
-        const color = new THREE.Color().setHSL((time % 10) / 10, 0.8, 0.6);
-        this.splatStack.push({
-            x,
-            y,
-            dx: (Math.random() - 0.5) * 100,
-            dy: (Math.random() - 0.5) * 100,
-            color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(2.0),
-        });
-    }
-
-    // Device orientation handler - tilt phone to move fluid (Mobile only, more sensitive)
+    // Device orientation handler - tilt phone to move fluid (Mobile only, sensitive)
     private lastOrientation = { beta: 0, gamma: 0 };
     onDeviceOrientation(e: DeviceOrientationEvent) {
         if (e.beta === null || e.gamma === null) return;
@@ -421,7 +364,7 @@ export class FluidBackground {
         const dx = (gamma - this.lastOrientation.gamma) * 2;
         const dy = (beta - this.lastOrientation.beta) * 2;
 
-        // More sensitive threshold (0.1 instead of 0.5)
+        // More sensitive threshold (0.1)
         if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
             const time = Date.now() * 0.001;
             const color = new THREE.Color().setHSL((time % 10) / 10, 0.7, 0.5);
@@ -429,9 +372,9 @@ export class FluidBackground {
             this.splatStack.push({
                 x: 0.5 + gamma / 180, // Center-ish based on tilt
                 y: 0.5 + beta / 360,
-                dx: dx * 30, // Stronger/longer strokes
-                dy: -dy * 30,
-                color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(5.0), // Brighter
+                dx: dx * 10, // Original intensity
+                dy: -dy * 10,
+                color: new THREE.Vector3(color.r, color.g, color.b).multiplyScalar(2.0),
             });
         }
 
