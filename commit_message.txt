@@ -1,6 +1,5 @@
-chore: apply lint fixes, finalize docs, and clean up code
+fix: restore missing FluidBackground members and apply lint fixes
 
-- fix: remove unused appElement from main.ts to fix build error
-- style: apply lint fixes to FluidBackground.ts
-- docs: move project preferences from GEMINI.md to ARCHITECTURE.md
-- chore: remove temporary commit message file
+- Restore accidentally removed class properties in FluidBackground.ts during previous optimization step.
+- Apply automated lint fixes (prettier/eslint) across the codebase.
+- Verify successful build.

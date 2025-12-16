@@ -143,6 +143,44 @@ function createFBO(width: number, height: number, type: THREE.TextureDataType) {
 }
 
 export class FluidBackground {
+  private container: HTMLElement;
+  private renderer: THREE.WebGLRenderer;
+  private scene: THREE.Scene;
+  private camera: THREE.OrthographicCamera;
+  private mesh: THREE.Mesh;
+
+  // Simulation resolution
+  private simResX = 128;
+  private simResY = 128;
+
+  // FBOs
+  private density: any;
+  private velocity: any;
+  private pressure: any;
+  private divergence: THREE.WebGLRenderTarget;
+
+  // Materials
+  private splatMaterial: THREE.ShaderMaterial;
+
+  private advectionMaterial: THREE.ShaderMaterial;
+  private divergenceMaterial: THREE.ShaderMaterial;
+  private pressureMaterial: THREE.ShaderMaterial;
+  private gradientSubtractMaterial: THREE.ShaderMaterial;
+  private displayMaterial: THREE.ShaderMaterial;
+
+  // Interaction
+  private lastMouse = new THREE.Vector2();
+  private splatStack: Array<{
+    x: number;
+    y: number;
+    dx: number;
+    dy: number;
+    color: THREE.Vector3;
+  }> = [];
+
+  // Animation
+  private lastTime = 0;
+
   // Optimize: Intersection Observer to pause when not visible
   private observer: IntersectionObserver | null = null;
   private isVisible = true;

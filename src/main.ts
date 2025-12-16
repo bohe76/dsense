@@ -22,7 +22,7 @@ const lenis = new Lenis({
 (window as any).lenis = lenis;
 
 // Header is now created outside of #app so we don't need appElement here anymore
-// const appElement = document.getElementById('app'); 
+// const appElement = document.getElementById('app');
 const blurFilter = document.querySelector('#vertical-blur feGaussianBlur');
 // Select the project grid container dynamically (after it's rendered) or check inside the loop
 // Since components are rendered later, we might need to select it inside 'scroll' or wait.
