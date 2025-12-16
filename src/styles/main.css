@@ -1,0 +1,16 @@
+/* Main CSS Entry Point */
+
+/* 1. Base (Variables, Reset, Fonts) */
+@import './base.css';
+
+/* 2. Utilities (Helpers) */
+@import './utilities.css';
+
+/* 3. Layout (Global structure) */
+@import './layout.css';
+
+/* 4. Components (Sections and features) */
+@import './components/hero.css';
+@import './components/about.css';
+@import './components/projects.css';
+@import './components/contact.css';

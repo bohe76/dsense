@@ -1,0 +1,153 @@
+/* About Component */
+.about {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-color);
+    /* Light gray for subtle separation */
+    padding: var(--section-padding) 0;
+}
+
+.about-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.word-about {
+    font-weight: 100;
+    font-size: 6vw;
+    text-transform: none;
+    /* Mixed case "About" */
+    opacity: 0.6;
+    letter-spacing: -0.05em;
+}
+
+.word-us {
+    font-weight: 800;
+    font-size: 9vw;
+    text-transform: uppercase;
+    color: var(--text-color);
+    letter-spacing: -0.02em;
+    margin-left: 2rem;
+    /* Adjusted to match WORKS */
+    margin-top: 0;
+    position: relative;
+}
+
+.word-start {
+    font-weight: 100;
+    font-size: 6vw;
+    text-transform: none;
+    opacity: 0.6;
+    letter-spacing: -0.05em;
+}
+
+.word-together {
+    font-weight: 800;
+    font-size: 9vw;
+    /* Unified size */
+    text-transform: uppercase;
+    color: var(--text-color);
+    letter-spacing: -0.02em;
+    margin-left: 1.5rem;
+    /* Indentation match About */
+}
+
+.word-selected {
+    font-weight: 100;
+    font-size: 6vw;
+    text-transform: none;
+    opacity: 0.6;
+    letter-spacing: -0.05em;
+}
+
+.word-works {
+    font-weight: 800;
+    font-size: 9vw;
+    text-transform: uppercase;
+    color: var(--text-color);
+    letter-spacing: -0.02em;
+    margin-left: 1.5rem;
+    margin-top: 0;
+    position: relative;
+}
+
+.about-text {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.2;
+    font-weight: 300;
+    color: var(--text-muted);
+    /* Changed from #ccc to variable */
+    max-width: 1200px;
+}
+
+.about-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 800px;
+    /* Readability width */
+    margin-top: 3rem;
+    font-weight: 400;
+    word-break: keep-all;
+    /* Better for Korean */
+}
+
+.about-description p {
+    margin-bottom: 1.5rem;
+}
+
+.about-description.right-aligned {
+    text-align: right;
+    margin-left: auto;
+    /* Push to right */
+}
+
+@media (max-width: 768px) {
+    .about-description.right-aligned {
+        text-align: left;
+        margin-left: 0;
+    }
+}
+
+/* Thinking Section specific styles */
+.thinking-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--section-padding) 0;
+    background-color: #2C2C2C;
+    /* Darker Gray */
+    color: #ffffff;
+}
+
+.thinking-section .word-about,
+.thinking-section .word-us,
+.thinking-section .about-text,
+.thinking-section .about-description,
+.thinking-section .highlight {
+    color: #ffffff !important;
+}
+
+.highlight {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.serif-italic {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-color);
+}
+
+@media (min-width: 768px) {
+    .about-title-indent {
+        margin-left: 6vw;
+        /* Adjusts indent only on PC */
+    }
+}

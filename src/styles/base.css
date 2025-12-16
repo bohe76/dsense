@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700&display=swap');
+
+:root {
+    /* Colors - Light Mode */
+    --bg-color: #f8f8f8;
+    /* Softer off-white */
+    --text-color: #111111;
+    --text-muted: #666666;
+    --accent-color: #e50914;
+    --surface-color: #ffffff;
+    /* Card surface to white for contrast */
+
+    /* Typography */
+    --font-main: 'Inter', sans-serif;
+    --font-display: 'Playfair Display', serif;
+
+    /* Spacing */
+    --container-width: 1400px;
+    --section-padding: 10rem;
+
+    /* Z-Index */
+    --z-cursor: 9999;
+    --z-header: 100;
+    --z-video: -1;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    /* overflow-x: hidden; Removed to fix sticky positioning */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    /* overflow-x: hidden; Removed to fix sticky positioning */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.02em;
+    /* Tighter tracking like Card UI */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+/* Hide Scrollbar - Clean UI across all backgrounds (Mobile + Desktop) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+::-webkit-scrollbar {
+    display: none;
+}
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: clip;
+    /* filter: url('#vertical-blur'); Removed to fix sticky/fixed positioning */
+}
+
+.mix-difference {
+    mix-blend-mode: difference;
+    color: #fff;
+}
+
+/* Legacy cursor styles (commented out) */
+@media (min-width: 768px) {
+    /* body,
+  a,
+  button,
+  .project-card {
+    cursor: none;
+  } */
+}

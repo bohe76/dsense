@@ -1,0 +1,87 @@
+/* Contact Component */
+.contact {
+    min-height: 100vh;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15vw;
+    font-weight: 800;
+    color: #000;
+    opacity: 0.05;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.contact-content {
+    text-align: center;
+    z-index: 10;
+}
+
+.contact-label {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.contact-email {
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-email:hover {
+    color: #555;
+}
+
+.social-links {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.social-link {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.social-lin.work-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    background: #eee;
+    color: #555;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Mobile Typography: Contact Email */
+@media (max-width: 768px) {
+    .contact-email {
+        font-size: clamp(1.5rem, 8vw, 3rem) !important;
+        word-break: break-all;
+        /* Safety: break long strings if absolutely needed */
+    }
+}
+
+/* Mobile Typography: Contact Label */
+@media (max-width: 768px) {
+    .contact-label {
+        font-size: 1rem !important;
+        /* Ensure label is smaller than email */
+        margin-bottom: 0.5rem;
+    }
+}
