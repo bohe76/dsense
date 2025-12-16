@@ -796,11 +796,6 @@ ul {
   overflow: hidden;
 }
 
-.work-card:hover {
-  /* transform: translateY(-8px); removed to prevent layout shift */
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
-  background-color: #272926;
-}
 
 .work-image-wrapper {
   position: relative;
@@ -830,10 +825,6 @@ ul {
   pointer-events: none;
 }
 
-.work-card:hover .work-overlay {
-  opacity: 1;
-}
-
 .work-play-btn {
   position: absolute;
   top: 50%;
@@ -859,16 +850,28 @@ ul {
   height: 48px;
 }
 
-/* Hover Interactions */
-.work-card:hover .work-image {
-  transform: scale(1.02);
-  filter: brightness(1.1);
-  /* Subtle Zoom & Glow */
-}
+/* Hover Interactions - PC Only */
+@media (hover: hover) {
+  .work-card:hover {
+    /* transform: translateY(-8px); removed to prevent layout shift */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
+    background-color: #272926;
+  }
 
-.work-card:hover .work-play-btn {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  .work-card:hover .work-overlay {
+    opacity: 1;
+  }
+
+  .work-card:hover .work-image {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+    /* Subtle Zoom & Glow */
+  }
+
+  .work-card:hover .work-play-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 /* Info & Typography - High End Editorial Style */
@@ -908,20 +911,10 @@ ul {
   color: #ffffff;
 }
 
-.work-card:hover .work-category-chip[data-cat="Web"] {
-  background-color: #C2185B;
-  /* Brighter Pink/Red */
-}
-
 /* Interactive: Cocoa Brown */
 .work-category-chip[data-cat="Kiosk"] {
   background-color: #795548;
   color: #ffffff;
-}
-
-.work-card:hover .work-category-chip[data-cat="Kiosk"] {
-  background-color: #A1887F;
-  /* Lighter Brown */
 }
 
 /* Motion & Video: Olive Lime */
@@ -930,31 +923,16 @@ ul {
   color: #ffffff;
 }
 
-.work-card:hover .work-category-chip[data-cat="Motion & Video"] {
-  background-color: #00BCD4;
-  /* Brighter Lime */
-}
-
 /* Branding & Design: Amber */
 .work-category-chip[data-cat="Branding & Design"] {
   background-color: #FF8F00;
   color: #ffffff;
 }
 
-.work-card:hover .work-category-chip[data-cat="Branding & Design"] {
-  background-color: #FFB300;
-  /* Lighter Amber */
-}
-
 /* SaaS: Red */
 .work-category-chip[data-cat="SaaS"] {
   background-color: #F44336;
   color: #ffffff;
-}
-
-.work-card:hover .work-category-chip[data-cat="SaaS"] {
-  background-color: #EF5350;
-  /* Lighter Red */
 }
 
 
@@ -965,11 +943,6 @@ ul {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: color 1.4s ease;
-}
-
-.work-card:hover .work-client {
-  color: #cccccc;
-  /* Light Gray */
 }
 
 /* Title Typography - Editorial High End */
@@ -983,11 +956,6 @@ ul {
   margin-bottom: 1.2rem;
   transition: color 0.4s ease;
   /* 0.4s transition */
-}
-
-.work-card:hover .work-title {
-  color: #ffffff;
-  /* Pure White on Hover */
 }
 
 /* Unified Chip Container */
@@ -1018,12 +986,50 @@ ul {
   height: max-content;
 }
 
-.work-card:hover .work-tag-chip {
-  border-color: rgba(255, 255, 255, 0.4);
-  /* Lighter border for dark mode */
-  color: #eeeeee;
-  /* White-ish text */
-  background-color: transparent;
+/* Hover Interactions - PC Only */
+@media (hover: hover) {
+  .work-card:hover .work-category-chip[data-cat="Web"] {
+    background-color: #C2185B;
+    /* Brighter Pink/Red */
+  }
+
+  .work-card:hover .work-category-chip[data-cat="Kiosk"] {
+    background-color: #A1887F;
+    /* Lighter Brown */
+  }
+
+  .work-card:hover .work-category-chip[data-cat="Motion & Video"] {
+    background-color: #00BCD4;
+    /* Brighter Lime */
+  }
+
+  .work-card:hover .work-category-chip[data-cat="Branding & Design"] {
+    background-color: #FFB300;
+    /* Lighter Amber */
+  }
+
+  .work-card:hover .work-category-chip[data-cat="SaaS"] {
+    background-color: #EF5350;
+    /* Lighter Red */
+  }
+
+  .work-card:hover .work-client {
+    color: #cccccc;
+    /* Light Gray */
+  }
+
+  .work-card:hover .work-title {
+    color: #ffffff;
+    /* Pure White on Hover */
+  }
+
+  .work-card:hover .work-tag-chip {
+    border-color: rgba(255, 255, 255, 0.4);
+    /* Lighter border for dark mode */
+    color: #eeeeee;
+    /* White-ish text */
+    background-color: transparent;
+  }
 }
 
 /* Contact Component */
