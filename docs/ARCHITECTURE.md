@@ -37,7 +37,13 @@ d:/dsense/
 │   └── sitemap.xml         # 검색 엔진 사이트맵
 └── src/                    # 애플리케이션 소스 코드
     ├── main.ts             # 애플리케이션 진입점 및 컴포넌트 초기화 로직
-    ├── style.css           # 전역 스타일 시트
+    ├── main.ts             # 애플리케이션 진입점 및 컴포넌트 초기화 로직
+    ├── styles/             # [NEW] 스타일시트 디렉토리 (모듈화)
+    │   ├── base.css        # 기본 설정 (변수, 리셋)
+    │   ├── utilities.css   # 유틸리티 클래스
+    │   ├── layout.css      # 공통 레이아웃 (헤더, 모바일 메뉴)
+    │   ├── main.css        # 메인 진입 CSS
+    │   └── components/     # 컴포넌트별 스타일 (hero, about, projects, contact)
     ├── types.ts            # 공통 데이터 타입 정의 (인터페이스)
     ├── components/         # UI 컴포넌트 (클래스 기반)
     │   ├── Header.ts       # 헤더 내비게이션 및 애니메이션
@@ -83,7 +89,14 @@ d:/dsense/
 - **활용**: `ProjectList.ts` 컴포넌트가 `works.json` 데이터를 import하여 필터링 및 렌더링 로직에 활용합니다. `ProjectCard.ts` 헬퍼 함수는 이 데이터와 `thumbnail` 경로를 받아 개별 포트폴리오 카드의 HTML을 생성합니다.
 
 ### 3.4. 스타일링 전략
-- 별도의 CSS 프레임워크(Tailwind CSS, Bootstrap 등) 없이 `src/style.css` 단일 파일로 모든 전역 및 컴포넌트별 스타일이 관리됩니다.
+### 3.4. 스타일링 전략
+- **모듈화된 CSS 아키텍처**: 유지보수성과 확장성을 위해 기존의 거대한 `style.css`를 `src/styles/` 디렉토리 하위의 기능별/컴포넌트별 파일로 분리했습니다.
+  - `main.css`가 진입점 역할을 하며 다른 CSS 파일들을 `@import` 합니다.
+  - **Base**: `base.css` (변수, 리셋)
+  - **Utilities**: `utilities.css` (재사용 가능한 헬퍼 클래스)
+  - **Layout**: `layout.css` (헤더, 푸터 등 전역 구조)
+  - **Components**: `components/*.css` (각 섹션별 독립적인 스타일)
+- **BEM(Block Element Modifier)** 네이밍 컨벤션을 기반으로 한 클래스명과 유틸리티 클래스(`flex`, `container` 등)를 혼용하여 사용합니다.
 - **BEM(Block Element Modifier)** 네이밍 컨벤션을 기반으로 한 클래스명과, 레이아웃 및 유틸리티를 위한 클래스(`flex`, `container` 등)가 혼용되어 사용됩니다.
 - 반응형 디자인은 `@media (min-width: ...)` 쿼리를 주로 사용하여 데스크톱 우선(Desktop-First) 방식으로 구현됩니다.
 - 커스텀 CSS 변수(`:root`에 정의된 `--bg-color`, `--text-color` 등)를 적극 활용하여 테마 및 유지보수를 용이하게 합니다.
@@ -183,7 +196,7 @@ d:/dsense/
 - **프로젝트 추가**: `src/data/works.json`에 새 `WorkItem` 항목을 추가합니다. `public/images/`에 썸네일 이미지를, Cloudflare R2에 비디오 파일을 업로드한 후 `video_src`에 해당 URL을 기입합니다. `video_width`와 `video_height`도 함께 추가하여 레이아웃 안정성을 확보해야 합니다.
 - **섹션 추가**: `src/components/`에 새 클래스 파일을 만들고, `src/main.ts`에서 해당 컴포넌트를 import 및 초기화하며, `index.html`에 적절한 컨테이너 `HTMLElement`를 추가합니다.
 - **타입 수정**: 데이터 구조 변경 시 `src/types.ts`의 `WorkItem` 인터페이스를 반드시 함께 수정하여 타입 안정성을 유지해야 합니다.
-- **스타일 변경**: `src/style.css`의 CSS 변수를 활용하거나, 기존 BEM 기반 클래스를 따르는 새로운 스타일을 추가합니다.
+- **스타일 변경**: `src/styles/` 디렉토리 내의 적절한 CSS 파일(`base.css`, `layout.css` 또는 `components/*.css`)을 수정하거나 새로운 컴포넌트 CSS 파일을 생성하여 `main.css`에 등록합니다. 기존 BEM 기반 클래스를 따르는 새로운 스타일을 추가합니다.
 - **애니메이션 추가**: GSAP 및 ScrollTrigger API 문서를 참조하여 `initAnimations()` 메서드 내에서 새로운 애니메이션 시퀀스를 구현합니다.
 
 ---
