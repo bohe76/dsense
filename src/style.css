@@ -805,7 +805,8 @@ ul {
 .work-image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 1.8;
+  /* Adjusted from 16/10 to 1.8 to prevent horizontal cropping (based on widest source image) */
   background-color: #f5f5f5;
   border-radius: 0;
   overflow: hidden;
