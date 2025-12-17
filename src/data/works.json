@@ -207,7 +207,8 @@
       "웹 내장 커스텀 미디어 플레이어"
     ],
     "thumbnail": "/images/011.png",
-    "video_src": null
+    "video_src": null,
+    "site_url": "http://www.redcampaign.co.kr/"
   },
   {
     "no": 12,
@@ -228,7 +229,8 @@
       "실시간 데이터 동기화(Cloud DB)"
     ],
     "thumbnail": "/images/012.png",
-    "video_src": null
+    "video_src": null,
+    "site_url": "http://diningmanager.co.kr/"
   },
   {
     "no": 13,
@@ -267,7 +269,8 @@
       "데이터 기반 네이버 플레이스 지수 산출"
     ],
     "thumbnail": "/images/014.png",
-    "video_src": null
+    "video_src": null,
+    "site_url": "https://nplaceup.com/"
   },
   {
     "no": 15,

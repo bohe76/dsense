@@ -1,5 +1,0 @@
-fix: restore missing FluidBackground members and apply lint fixes
-
-- Restore accidentally removed class properties in FluidBackground.ts during previous optimization step.
-- Apply automated lint fixes (prettier/eslint) across the codebase.
-- Verify successful build.

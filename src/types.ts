@@ -10,4 +10,5 @@ export interface WorkItem {
   video_src?: string | null;
   video_width?: number;
   video_height?: number;
+  site_url?: string | null;
 }
