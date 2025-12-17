@@ -107,8 +107,11 @@ export class VideoModal {
 
     if (project.video_width && project.video_height) {
       this.videoElement.style.aspectRatio = `${project.video_width} / ${project.video_height}`;
+      // Prevent video from exceeding its native width on large screens, while staying within viewport bounds
+      this.videoElement.style.maxWidth = `min(90%, ${project.video_width}px)`;
     } else {
       this.videoElement.style.aspectRatio = 'auto';
+      this.videoElement.style.maxWidth = '90%'; // Fallback default
     }
 
     this.videoElement.src = project.video_src;

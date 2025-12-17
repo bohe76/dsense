@@ -175,7 +175,7 @@
 }
 
 /* Hover Interactions - PC Only */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
     .work-card:hover {
         /* transform: translateY(-8px); removed to prevent layout shift */
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
@@ -238,6 +238,10 @@
         color: #eeeeee;
         /* White-ish text */
         background-color: transparent;
+    }
+
+    .work-card:hover .work-feature-item {
+        color: #eeeeee;
     }
 }
 
@@ -375,9 +379,7 @@
     line-height: 1.4;
 }
 
-.work-card:hover .work-feature-item {
-    color: #eeeeee;
-}
+/* Removed .work-card:hover .work-feature-item from here */
 
 .work-feature-item::before {
     content: none;
