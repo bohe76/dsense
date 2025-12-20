@@ -58,17 +58,17 @@ export class ProjectList {
           <span class="chip-text">ALL</span>
         </div>
         ${this.allCategories
-          .map((cat) => {
-            const isActive = this.activeCategories.includes(cat)
-              ? ''
-              : 'inactive'; // In "Select Mode", only selected are active.
-            return `
+        .map((cat) => {
+          const isActive = this.activeCategories.includes(cat)
+            ? ''
+            : 'inactive'; // In "Select Mode", only selected are active.
+          return `
             <div class="filter-chip ${isActive}" data-cat="${cat}" data-initial="${cat.charAt(0)}">
               <span class="chip-text">${cat}</span>
             </div>
           `;
-          })
-          .join('')}
+        })
+        .join('')}
       </div>
     `;
 
@@ -93,24 +93,24 @@ export class ProjectList {
         <!-- 3-Column Grid -->
         <div class="project-grid-3col">
           ${this.projects
-            .map((work) => {
-              // Add a wrapper or inject data-category into the card for easy filtering
-              // Since createProjectCard returns a string, we need to ensure the root element has the category
-              // We can do this by wrapping or modifying createProjectCard.
-              // Currently createProjectCard returns a div with class "work-card group".
-              // We'll wrap it or better yet, simply rely on the fact createProjectCard adds data-id,
-              // but for filtering performance, data-category on the card is best.
-              // Let's modify the string slightly to include data-category if ProjectCard doesn't already (it uses data-cat inside for the chip).
-              // Actually, ProjectCard.ts adds data-id. We will inject data-category into the card string here using replace.
+        .map((work) => {
+          // Add a wrapper or inject data-category into the card for easy filtering
+          // Since createProjectCard returns a string, we need to ensure the root element has the category
+          // We can do this by wrapping or modifying createProjectCard.
+          // Currently createProjectCard returns a div with class "work-card group".
+          // We'll wrap it or better yet, simply rely on the fact createProjectCard adds data-id,
+          // but for filtering performance, data-category on the card is best.
+          // Let's modify the string slightly to include data-category if ProjectCard doesn't already (it uses data-cat inside for the chip).
+          // Actually, ProjectCard.ts adds data-id. We will inject data-category into the card string here using replace.
 
-              const cardHtml = createProjectCard(work, work.thumbnail);
-              // Inject data-category attribute into the opening tag of the card
-              return cardHtml.replace(
-                'class="work-card group"',
-                `class="work-card group" data-category="${work.category}"`
-              );
-            })
-            .join('')}
+          const cardHtml = createProjectCard(work, work.thumbnail);
+          // Inject data-category attribute into the opening tag of the card
+          return cardHtml.replace(
+            'class="work-card group"',
+            `class="work-card group" data-category="${work.category}"`
+          );
+        })
+        .join('')}
         </div>
         
         <!-- Floating Mobile Counter -->
@@ -134,9 +134,14 @@ export class ProjectList {
           const id = card.getAttribute('data-id');
           if (id) {
             const project = this.projects.find((p) => p.no === Number(id));
-            if (project && project.video_src) {
-              // Only if video source exists
-              this.videoModal.open(project);
+            if (project) {
+              if (project.video_src) {
+                // Only if video source exists
+                this.videoModal.open(project);
+              } else if (project.site_url) {
+                // Site URL exists
+                window.open(project.site_url, '_blank');
+              }
             }
           }
         }

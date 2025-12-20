@@ -24,11 +24,11 @@ export const createProjectCard = (
          `
       : work.site_url
         ? `
-           <a href="${work.site_url}" target="_blank" rel="noopener noreferrer" class="work-play-btn" title="Visit Website">
+           <div class="work-play-btn" title="Visit Website">
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 24px; height: 24px;">
                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5L19.5 4.5M19.5 4.5H8.25M19.5 4.5V15.75" />
              </svg>
-           </a>
+           </div>
          `
         : ''
     }
