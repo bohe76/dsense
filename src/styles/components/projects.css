@@ -419,6 +419,24 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* iOS/WebKit Specific Adjustment for Glassmorphism */
+@supports (-webkit-touch-callout: none) {
+    .category-filter-container {
+        /* Slightly more opaque on iOS (-webkit-) to compensate for washed-out blur */
+        background: rgba(248, 248, 248, 0.75);
+        /* Boost saturation to mimic Chrome's vibrancy */
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        backdrop-filter: blur(12px) saturate(180%);
+    }
+
+    /* Dark mode iOS adjustment */
+    @media (prefers-color-scheme: dark) {
+        .category-filter-container {
+            background: rgba(20, 20, 20, 0.65);
+        }
+    }
+}
+
 .chip-text {
     position: relative;
     z-index: 1;

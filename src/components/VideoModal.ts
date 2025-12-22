@@ -28,7 +28,7 @@ export class VideoModal {
         opacity: 0;
         transition: opacity 0.3s ease;
       ">
-        <video id="modal-video-player" controls autoplay style="
+        <video id="modal-video-player" controls autoplay playsinline style="
           max-width: 90%; 
           max-height: 90%; 
           width: auto; 

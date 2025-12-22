@@ -307,12 +307,7 @@ export class FluidBackground {
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
 
     // Device Orientation (Gyroscope) - Mobile only
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener(
-        'deviceorientation',
-        this.onDeviceOrientation.bind(this)
-      );
-    }
+    this.initDeviceOrientation();
 
     // Initial Splats for visual
     for (let i = 0; i < 5; i++) {
@@ -358,6 +353,43 @@ export class FluidBackground {
     }, options);
 
     this.observer.observe(this.container);
+  }
+
+  initDeviceOrientation() {
+    if (!window.DeviceOrientationEvent) return;
+
+    // iOS 13+ requires permission
+    if (
+      typeof (DeviceOrientationEvent as any).requestPermission === 'function'
+    ) {
+      const requestPermission = () => {
+        (DeviceOrientationEvent as any)
+          .requestPermission()
+          .then((response: string) => {
+            if (response === 'granted') {
+              window.addEventListener(
+                'deviceorientation',
+                this.onDeviceOrientation.bind(this)
+              );
+            }
+          })
+          .catch(console.error)
+          .finally(() => {
+            window.removeEventListener('click', requestPermission);
+            window.removeEventListener('touchstart', requestPermission);
+          });
+      };
+
+      // Add listener for first interaction
+      window.addEventListener('click', requestPermission);
+      window.addEventListener('touchstart', requestPermission);
+    } else {
+      // Non-iOS 13+ devices
+      window.addEventListener(
+        'deviceorientation',
+        this.onDeviceOrientation.bind(this)
+      );
+    }
   }
 
   onResize() {
