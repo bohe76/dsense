@@ -407,14 +407,15 @@
     top: 80px;
     z-index: 90;
 
-    /* Glassmorphism Pill - Unified Style */
-    /* Base: Chrome & Standard Light Mode -> Clean, lighter transparency */
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    /* Glassmorphism Pill - Unified Global Style */
+    /* Force white glass effect for ALL browsers (Chrome/Edge/iOS/Safari) */
+    /* Removed all conditional logic as targeting failed on Edge */
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 50px;
 
-    /* Clean, soft shadow for Chrome */
+    /* Clean, simple border & shadow */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.4);
 
@@ -422,33 +423,7 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 1. iOS/Webkit Branch: Force Strong White Fix */
-@supports (-webkit-touch-callout: none) {
-    .category-filter-container {
-        /* iOS Rendering Fix: High opacity + Inset Glow */
-        background: rgba(255, 255, 255, 0.65);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        backdrop-filter: blur(20px) saturate(180%);
-        box-shadow:
-            0 4px 30px rgba(0, 0, 0, 0.05),
-            inset 0 0 20px rgba(255, 255, 255, 0.5);
-        /* Strong Inner Glow */
-    }
-}
-
-/* 2. Dark Mode / Edge Branch: Force Strong White Fix */
-/* Edge often defaults to dark mode preferences or renders transparent blacks poorly */
-@media (prefers-color-scheme: dark) {
-    .category-filter-container {
-        /* Force bright white glass even in dark environments */
-        background: rgba(255, 255, 255, 0.65);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        box-shadow:
-            0 4px 30px rgba(0, 0, 0, 0.1),
-            inset 0 0 20px rgba(255, 255, 255, 0.5);
-        /* Strong Inner Glow */
-    }
-}
+/* Removed @supports and @media queries to ensure consistency everywhere */
 
 .chip-text {
     position: relative;
