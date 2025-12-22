@@ -407,34 +407,46 @@
     top: 80px;
     z-index: 90;
 
-    /* Glassmorphism Pill (Permanent) */
-    background: rgba(248, 248, 248, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    /* Glassmorphism Pill - Unified Style */
+    /* Base: Chrome & Standard Light Mode -> Clean, lighter transparency */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    /* Clean, soft shadow for Chrome */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 
     /* Transition */
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* iOS/WebKit Specific Adjustment for Glassmorphism */
+/* 1. iOS/Webkit Branch: Force Strong White Fix */
 @supports (-webkit-touch-callout: none) {
     .category-filter-container {
-        /* 크롬처럼 투명감을 주기 위해 불투명도를 0.75에서 0.4로 하향 조정 */
-        background: rgba(248, 248, 248, 0.4);
-        /* iOS 특유의 흐릿함을 개선하기 위해 블러는 깊게, 채도는 자연스럽게 조정 */
-        -webkit-backdrop-filter: blur(15px) saturate(140%);
-        backdrop-filter: blur(15px) saturate(140%);
+        /* iOS Rendering Fix: High opacity + Inset Glow */
+        background: rgba(255, 255, 255, 0.65);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
+        box-shadow:
+            0 4px 30px rgba(0, 0, 0, 0.05),
+            inset 0 0 20px rgba(255, 255, 255, 0.5);
+        /* Strong Inner Glow */
     }
+}
 
-    /* Dark mode iOS adjustment */
-    @media (prefers-color-scheme: dark) {
-        .category-filter-container {
-            /* 0.65에서 0.45로 조정하여 '검정 막대' 현상 해결 */
-            background: rgba(20, 20, 20, 0.45);
-        }
+/* 2. Dark Mode / Edge Branch: Force Strong White Fix */
+/* Edge often defaults to dark mode preferences or renders transparent blacks poorly */
+@media (prefers-color-scheme: dark) {
+    .category-filter-container {
+        /* Force bright white glass even in dark environments */
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow:
+            0 4px 30px rgba(0, 0, 0, 0.1),
+            inset 0 0 20px rgba(255, 255, 255, 0.5);
+        /* Strong Inner Glow */
     }
 }
 

@@ -1,0 +1,4 @@
+fix: 글래스모피즘 브라우저 호환성 문제 해결 (iOS/Edge)
+
+- Chrome 등 기본 환경은 기존 투명 스타일(0.45) 유지
+- iOS, Edge(Dark Mode) 등에서 유리가 검게 보이는 현상 해결을 위해 불투명도 상향(0.65) 및 Inset Shadow 추가
