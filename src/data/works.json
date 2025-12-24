@@ -467,5 +467,28 @@
     "video_src": "https://pub-d9ca82cd711942f98faa7b2228e78c3d.r2.dev/videos/024.mp4",
     "video_width": 1280,
     "video_height": 720
+  },
+  {
+    "no": 25,
+    "category": "Web",
+    "project_name": "Sketchrang",
+    "client": "Own Service",
+    "tech_stack": [
+      "React",
+      "Node.js",
+      "Firebase",
+      "Sanity",
+      "Canvas API",
+      "Serverless"
+    ],
+    "media_type": null,
+    "key_features": [
+      "Zero-Latency 선행 업로드(Pre-upload) 및 병렬 처리 UX",
+      "클라이언트 사이드 초경량 캔버스 엔진 및 스냅샷 최적화",
+      "커스텀 소셜 공유 UI(Share Sheet) 및 OAuth 통합"
+    ],
+    "thumbnail": "/images/025.png",
+    "video_src": null,
+    "site_url": "https://sketchrang.vercel.app/"
   }
 ]
