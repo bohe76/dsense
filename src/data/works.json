@@ -484,7 +484,7 @@
     "media_type": null,
     "key_features": [
       "Zero-Latency 선행 업로드(Pre-upload) 및 병렬 처리 UX",
-      "클라이언트 사이드 초경량 캔버스 엔진 및 스냅샷 최적화",
+      "SNS 공유 최적화로 사용자 유입 증대와 클릭률(CTR)을 획기적으로 개선",
       "커스텀 소셜 공유 UI(Share Sheet) 및 OAuth 통합"
     ],
     "thumbnail": "/images/025.png",
